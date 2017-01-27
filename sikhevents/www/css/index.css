@@ -95,3 +95,16 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.cell{
+    width:100%;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    overflow:auto;
+
+}
+
+.cell:hover {
+    background-color: #bcd4ec;
+}
