@@ -35,18 +35,27 @@
             var items = [];
             $.each( data, function( key, val ) {
                 items.push(
-                    "<div class = \"cell\"><br> " +val["title"] +
-                    "<br>" + val["description"] +
-                    "<br>" + val["subtitle"] +
-                   "<br>" + val["sd"] +
-                    "</div>"
-                    )
+                    "<div class = \"cell\"> " +
+                    "<div style=\"width:30%; float:left; font-size:1.1em;  top: 50%; \">" +
+                    val["sd"] +
+                    "<br><br>" +
+                   "<br> <button class=\"infoBtn\" onClick=\"showDescription(" + val["description"] + ")\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\" aria-label=\"description\"></span></button> </div> " +
+                    "<div style=\"width:70%; float:left;\" <div class=\"programTitle\">" +
+                    val["title"] +
+                    "</div><br> <div class=\"programSubtitle\">" +
+                    val["subtitle"] +
+                    "</div><br> <a href=\"http://maps.google.com/?q=" +
+                    val["address"] + "\">" +
+                    "</a><br>" +
+                    val["phone"] +
+                    "<br></div>"
+                );
             });
  
-            $( "<ul/>", {
+            $( "<div/>", {
                 "class": "my-new-list",
                 html: items.join( "" )
-            }).appendTo( "body" );
+            }).appendTo( ".main-content" );
         });
     };
 

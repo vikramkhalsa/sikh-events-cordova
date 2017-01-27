@@ -7,7 +7,7 @@ body {
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
 	background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    /*background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-gradient(
@@ -17,22 +17,22 @@ body {
         color-stop(0, #A7A7A7),
         color-stop(0.51, #E4E4E4)
     );
-    background-attachment:fixed;
+    background-attachment:fixed;*/
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    /*text-transform:uppercase;*/
     width:100%;
 	
-    background-color:#32383d;
+    /*background-color:#32383d;*/
     font-family: 'RobotoRegular', 'Droid Sans', 'Segoe UI', Segoe, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
     font-size:12px;
 }
 
 .app {
-    background: url(../images/cordova.png) no-repeat center top; 
+    /*background: url(../images/cordova.png) no-repeat center top;*/ 
     position: absolute;             
     left: 50%;
     top: 50%;
@@ -105,6 +105,38 @@ h1 {
 
 }
 
-.cell:hover {
-    background-color: #bcd4ec;
+    .cell:hover {
+        background-color: #bcd4ec;
+    }
+
+    .infoBtn {
+padding:5px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.infoBtn:hover{
+padding:5px;
+  background-color: #AAA;
+}
+
+.programTitle {
+  font-size: 1.4em;
+}
+
+.programSubtitle {
+  font-weight: bold;
+  font-size:1.1em;
+}
+
+.header-bar {
+    height: 40px;
+    background: darkblue;
+    color: white;
+    padding: 10px;
+    align-content: center;
+    font-size: 1.3em;
+    width: 100%;
 }
