@@ -46,6 +46,7 @@
                     val["subtitle"] +
                     "</div><br> <a href=\"http://maps.google.com/?q=" +
                     val["address"] + "\">" +
+                    val["address"] +
                     "</a><br>" +
                     val["phone"] +
                     "<br></div>"
