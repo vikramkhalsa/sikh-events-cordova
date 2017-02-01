@@ -6,7 +6,7 @@
     "use strict";
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
-
+    var descriptions;
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
         document.addEventListener( 'pause', onPause.bind( this ), false );
@@ -39,7 +39,7 @@
                     "<div style=\"width:30%; float:left; font-size:1.1em;  top: 50%; \">" +
                     val["sd"] +
                     "<br><br>" +
-                   "<br> <button class=\"infoBtn\" onClick=\"showDescription(" + val["description"] + ")\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\" aria-label=\"description\"></span></button> </div> " +
+                   "<br> <button class=\"infoBtn\" val='" + val["description"]+"'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
                     "<div style=\"width:70%; float:left;\" <div class=\"programTitle\">" +
                     val["title"] +
                     "</div><br> <div class=\"programSubtitle\">" +
@@ -56,7 +56,12 @@
             $( "<div/>", {
                 "class": "my-new-list",
                 html: items.join( "" )
-            }).appendTo( ".main-content" );
+            }).appendTo(".main-content");
+
+            var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
+           for (var i = 0; i < btns.length; i++) {
+               btns[i].addEventListener('click', showDescription, false);
+           }
         });
     };
 
