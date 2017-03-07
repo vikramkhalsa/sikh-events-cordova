@@ -29,6 +29,7 @@
         //bkpLink.setAttribute("href", targetUrl);
         //bkpLink.text = targetUrl;
         //window.location.replace(targetUrl);
+        document.body.classList.add(cordova.platformId);
         $.getJSON("http://www.sikh.events/getprograms.php", function (data) {
 
             console.log("testing");
