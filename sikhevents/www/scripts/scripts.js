@@ -20,6 +20,19 @@ function alertDismissed() {
     // do something
 }
 
+function showAbout() {
+    var msg = "Sikh Events is an app which will show Kirtan programs from around the world in one location. " +
+        "Initially programs will be limited to the Bay Area, California but will be expanded to include other cities and countries. " +
+        "We also plan to allow other sikh events in the future. " +
+        "To submit a program, please visit the website: www.sikh.events";
+    navigator.notification.alert(
+      msg,  // message
+      alertDismissed,         // callback
+      'About',            // title
+      'OK'                  // buttonName
+  );
+}
+
 function formatDate(d) {
     var dt = new Date(d);
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

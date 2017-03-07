@@ -58,7 +58,7 @@
                 "class": "my-new-list",
                 html: items.join( "" )
             }).appendTo(".main-content");
-
+document.getElementById('aboutBtn').addEventListener('click',showAbout);
             var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
            for (var i = 0; i < btns.length; i++) {
                btns[i].addEventListener('click', showDescription, false);

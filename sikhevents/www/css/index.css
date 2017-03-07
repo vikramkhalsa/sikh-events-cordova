@@ -106,6 +106,16 @@ h1 {
         background-color: #bcd4ec;
     }
 
+    #aboutBtn {
+        border-width: 0;
+        background-color: transparent;
+        position: absolute;
+        right: 20px;
+                font-size: 15px;
+        color: white;
+        line-height: 40px;
+    }
+
     .infoBtn {
   padding: 5px 5px 0px 5px;
   border-style: solid;
