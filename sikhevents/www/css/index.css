@@ -132,8 +132,10 @@ h1 {
     background: darkblue;
     color: white;
     padding: 10px;
+    padding-left: 20px;
     align-content: center;
     font-size: 1.3em;
+    line-height: 40px;
 }
 
 .info-btn {

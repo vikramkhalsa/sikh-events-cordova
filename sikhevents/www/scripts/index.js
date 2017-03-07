@@ -33,14 +33,15 @@
 
             console.log("testing");
             var items = [];
-            $.each( data, function( key, val ) {
-                items.push(
-                    "<div class = \"cell\"> " +
-                    "<div style=\"width:30%; float:left; font-size:1.1em;  top: 50%; \">" +
-                    val["sd"] +
-                    "<br><br>" +
-                   "<br> <button class=\"infoBtn\" val='" + val["description"]+"'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
-                    "<div style=\"width:70%; float:left;\" <div class=\"programTitle\">" +
+            $.each(data, function (key, val) {
+                var sd = formatDate(val["sd"]);
+                var ed = formatDate(val["ed"]);
+                    items.push(
+                        "<div class = \"cell\"> " +
+                        "<div style=\"width:30%; float:left; font-size:1.1em;  top: 50%; \">" +
+                    sd.join("<br>") +"<br> to <br>" + ed[2] +
+                   "<br><br> <button class=\"infoBtn\" val='" + val["description"]+"'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
+                    "<div style=\"width:70%; float:left;\"> <div class=\"programTitle\">" +
                     val["title"] +
                     "</div><br> <div class=\"programSubtitle\">" +
                     val["subtitle"] +
