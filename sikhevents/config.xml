@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myapp41f616" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.khalis.sikhevents" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1" windows-packageVersion="10.0.0.0">
   <name>sikhevents</name>
-  <description>A blank project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS, Windows, and Windows Phone.</description>
-  <author href="http://cordova.io" email="dev@cordova.apache.org">Apache Cordova Team </author>
+  <description>Sikh Events is an app which will show sikhi-related events happening around the world in one location. This will include kirtan, katha, camps, and others. Users can submit events and anyone can see what is going on around them. Visit www.Sikh.events for more info.</description>
+  <author href="http://cordova.io" email="dev@cordova.apache.org">Vikram Singh Khalsa</author>
   <content src="index.html" />
   <access origin="*" />
   <vs:features />
   <preference name="SplashScreen" value="screen" />
-  <preference name="windows-target-version" value="10.0" />
+  <preference name="windows-target-version" value="8.1" />
   <!-- Support for Cordova 5.0.0 plugin system -->
   <plugin name="cordova-plugin-whitelist" version="1" />
   <allow-intent href="http://*/*" />
@@ -108,9 +108,12 @@
   </platform>
   <plugin name="cordova-plugin-network-information" version="1.3.1" />
   <plugin name="cordova-plugin-dialogs" version="1.3.1" />
-  <preference name="android-minSdkVersion" value="14" />
+  <preference name="android-minSdkVersion" value="12" />
   <preference name="android-targetSdkVersion" value="12" />
-  <access origin="http://google.com/" />
   <access origin="http://www.sikh.events*" />
   <plugin name="cordova-plugin-device" version="1.1.4" />
+  <preference name="WindowsStoreDisplayName" value="Sikh Events" />
+  <vs:platformSpecificValues>
+    <vs:platformSpecificWidget platformName="windows" id="com.khalis.sikhevents" version="10.0.0.0" />
+  </vs:platformSpecificValues>
 </widget>
