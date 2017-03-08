@@ -39,19 +39,19 @@
                 var ed = formatDate(val["ed"]);
                     items.push(
                         "<div class = \"cell\"> " +
-                        "<div style=\"width:30%; float:left; font-size:1.1em;  top: 50%; \">" +
-                    sd.join("<br>") +"<br> to <br>" + ed[2] +
-                   "<br><br> <button class=\"infoBtn\" val='" + val["description"]+"'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
-                    "<div style=\"width:70%; float:left;\"> <div class=\"programTitle\">" +
+                        "<div style=\"width:30%; float:left; font-size:1em;  top: 50%; \">" +
+                    sd[0] + ", "+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
+                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
+                    "<div style=\"width:70%; float:left; top: 50%; \"> <div class=\"programTitle\">" +
                     val["title"] +
-                    "</div><br> <div class=\"programSubtitle\">" +
+                    "</div><div class=\"programSubtitle\">" +
                     val["subtitle"] +
-                    "</div><br> <a href=\"http://maps.google.com/?q=" +
+                    "</div> <div class=\"spaced\"> <a href=\"http://maps.google.com/?q=" +
                     val["address"] + "\">" +
                     val["address"] +
-                    "</a><br>" +
+                    "</a></div>" +
                     val["phone"] +
-                    "<br></div>"
+                    "<br></div></div>"
                 );
             });
  
