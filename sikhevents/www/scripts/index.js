@@ -39,10 +39,10 @@
                 var ed = formatDate(val["ed"]);
                     items.push(
                         "<div class = \"cell\"> " +
-                        "<div style=\"width:30%; float:left; font-size:1em;  top: 50%; \">" +
-                    sd[0] + ", "+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
+                        "<div style=\"width:25%; margin-right:2%; float:left; font-size:1em;  top: 50%; \">" +
+                    sd[0] + "<br>"+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
                    "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
-                    "<div style=\"width:70%; float:left; top: 50%; \"> <div class=\"programTitle\">" +
+                    "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle\">" +
                     val["title"] +
                     "</div><div class=\"programSubtitle\">" +
                     val["subtitle"] +
