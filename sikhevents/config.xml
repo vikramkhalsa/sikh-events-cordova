@@ -108,7 +108,7 @@
   </platform>
   <plugin name="cordova-plugin-network-information" version="1.3.1" />
   <plugin name="cordova-plugin-dialogs" version="1.3.1" />
-  <preference name="android-minSdkVersion" value="12" />
+  <preference name="android-minSdkVersion" value="14" />
   <preference name="android-targetSdkVersion" value="12" />
   <access origin="http://www.sikh.events*" />
   <plugin name="cordova-plugin-device" version="1.1.4" />
