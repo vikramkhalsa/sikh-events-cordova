@@ -40,8 +40,8 @@ function formatDate(d) {
         var dateArr = d.split(' ');
         var date1 = dateArr[0].split('-');
         var time1 = dateArr[1].split(':');
-
-        var dt = new Date(date1[0], date1[1], date1[2], time1[0], time1[1], time1[2]);
+        //-1 from month because its 0 based
+        var dt = new Date(date1[0], date1[1]-1, date1[2], time1[0], time1[1], time1[2]);
 
         var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
