@@ -131,18 +131,18 @@ h1 {
 }
 
 .spaced {
-    padding-bottom: 10px;
+    margin-bottom: 5%;
 }
 
 .programTitle {
   font-size: 1.2em;
-    padding-bottom: 5px;
+   
 }
 
 .programSubtitle {
   font-weight: bold;
   font-size:1.1em;
-    padding-bottom: 5px;
+
 }
 
 .header-bar {

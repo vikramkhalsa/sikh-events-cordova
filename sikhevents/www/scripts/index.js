@@ -30,7 +30,7 @@
         //bkpLink.text = targetUrl;
         //window.location.replace(targetUrl);
         document.body.classList.add(cordova.platformId);
-        $.getJSON("http://www.sikh.events/getprograms.php", function (data) {
+        $.getJSON("http://www.sikh.events/getprograms.php?source=all", function (data) {
 
             console.log("testing");
             var items = [];
@@ -42,16 +42,16 @@
                         "<div style=\"width:25%; margin-right:2%; float:left; font-size:1em;  top: 50%; \">" +
                     sd[0] + "<br>"+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
                    "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
-                    "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle\">" +
+                    "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
                     val["title"] +
-                    "</div><div class=\"programSubtitle\">" +
+                    "</div><div class=\"programSubtitle spaced\">" +
                     val["subtitle"] +
                     "</div> <div class=\"spaced\"> <a href=\"http://maps.google.com/?q=" +
                     val["address"] + "\">" +
                     val["address"] +
                     "</a></div>" +
-                    val["phone"] +
-                    "<br></div></div>"
+                    val["phone"] + "<div class=\"spaced\">" +
+                    "</div></div></div>"
                 );
             });
  
