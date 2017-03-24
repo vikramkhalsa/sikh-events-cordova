@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.khalis.sikhevents" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1" windows-packageVersion="10.0.0.0">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="org.khalisfoundation.sikhevents" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1" windows-packageVersion="10.0.0.0">
   <name>Sikh Events</name>
   <description>Sikh Events is an app which will show sikhi-related events happening around the world in one location. This will include kirtan, katha, camps, and others. Users can submit events and anyone can see what is going on around them. Visit www.Sikh.events for more info.</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">Vikram Singh Khalsa</author>
@@ -88,16 +88,7 @@
     <splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi" />
   </platform>
   <platform name="ios">
-    <splash src="res/screens/ios/screen-iphone-portrait.png" width="320" height="480" />
-    <splash src="res/screens/ios/screen-iphone-portrait-2x.png" width="640" height="960" />
-    <splash src="res/screens/ios/screen-ipad-portrait.png" width="768" height="1024" />
-    <splash src="res/screens/ios/screen-ipad-portrait-2x.png" width="1536" height="2048" />
-    <splash src="res/screens/ios/screen-ipad-landscape.png" width="1024" height="768" />
-    <splash src="res/screens/ios/screen-ipad-landscape-2x.png" width="2048" height="1536" />
-    <splash src="res/screens/ios/screen-iphone-568h-2x.png" width="640" height="1136" />
-    <splash src="res/screens/ios/screen-iphone-portrait-667h.png" width="750" height="1334" />
-    <splash src="res/screens/ios/screen-iphone-portrait-736h.png" width="1242" height="2208" />
-    <splash src="res/screens/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
+    <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
   </platform>
   <platform name="windows">
     <splash src="res/screens/windows/SplashScreen.scale-100.png" width="620" height="300" />
