@@ -31,6 +31,7 @@
     <icon src="res/icons/android/icon-192-xhdpi.png" density="xxxhdpi" />
   </platform>
   <platform name="ios">
+    <splash src="res/screens/ios/Default@2x~universal~anyany.png" />
     <!-- iOS 8.0+ -->
     <!-- iPhone 6 Plus  -->
     <icon src="res/icons/ios/Icon-App-60x60@3x.png" width="180" height="180" />
@@ -87,9 +88,6 @@
     <splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi" />
     <splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi" />
   </platform>
-  <platform name="ios">
-    <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
-  </platform>
   <platform name="windows">
     <splash src="res/screens/windows/SplashScreen.scale-100.png" width="620" height="300" />
     <splash src="res/screens/windows/SplashScreen.scale-240.png" width="1152" height="1920" />
@@ -113,4 +111,5 @@
   <access origin="sikh.events*" />
   <access origin="http://sikh.events*" />
   <access origin="*" />
+  <plugin name="cordova-plugin-splashscreen" spec="~4.0.2" />
 </widget>
