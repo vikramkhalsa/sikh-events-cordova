@@ -123,10 +123,22 @@ h1 {
   border-width: 1px;
   border-radius: 50%;
   background-color: white;
-
+        margin-right: 4px;
 }
 
 .infoBtn:hover{
+  background-color: #AAA;
+}
+
+.icalBtn {
+  padding: 5px 5px 0px 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.icalBtn:hover{
   background-color: #AAA;
 }
 

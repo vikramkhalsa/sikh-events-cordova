@@ -43,8 +43,8 @@
                         "<div class = \"cell\" id=\""+ val["id"] + "\">" +
                         "<div class='sd' start='" + sd[3]+"' end='"+ ed[3] +"'>" +
                     sd[0] + "<br>"+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
-                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button>" +
-                   '<button class="icalBtn" val="' + val['id'] + '">i</button>  </div> ' +
+                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"css/images/icons-svg/info-black.svg\"></button>" +
+                   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
                     "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
                     val["title"] +
                     "</div><div class=\"programSubtitle spaced\">" +
@@ -70,7 +70,14 @@ document.getElementById('aboutBtn').addEventListener('click',showAbout);
            var icalBtns = document.getElementsByClassName('icalBtn');
            for (var i = 0; i < btns.length; i++) {
                 icalBtns[i].addEventListener('click', exporttocal, false);
+           }
+            //only add margin between buttons if width is above a certain minimum, 
+            //otherwise they go into 2 rows (iphones)
+            var w = $(".sd").width();
+            if (w > 80) {
+                $(".infoBtn").css("margin-right", "15px");
             }
+
         });
     };
 
