@@ -53,9 +53,29 @@ function formatDate(d) {
         var ampm = hrs < 12 ? "am" : "pm";
         hrs = hrs > 12 ? hrs - 12 : hrs == 0 ? 12 : hrs;
         var mins = dt.getMinutes();
+        if (mins <= 9)
+            mins = "0" + mins;
         var timestr = hrs + ":" + mins + " " + ampm;
-        return [day, datestr, timestr];
+        return [day, datestr, timestr,dt];
     } catch (ex) {
         return d; //if parsing/formatting failed, just show original date as is
     }
+}
+
+ 
+function exporttocal() {
+    var id = this.getAttribute("val");
+    var cell = $('#' + id);
+    var title = cell.find('.programTitle').html();
+    var addr = cell.find('a').html();
+    var start = cell.find('.sd').attr("start");
+    var startDate = new Date(start);
+    var desc = cell.find('.infoBtn').attr("val");
+    var end = cell.find('.sd').attr("end");
+    var endDate = new Date(end);
+    var success = function(message) { alert("Success: " + JSON.stringify(message)); };
+    var error = function(message) {
+        alert("Error: " + message);
+    };
+    window.plugins.calendar.createEventInteractively(title, addr, desc, startDate, endDate, success, error);
 }

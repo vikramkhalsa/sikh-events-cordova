@@ -35,13 +35,16 @@
             console.log("testing");
             var items = [];
             $.each(data, function (key, val) {
+
+
                 var sd = formatDate(val["sd"]);
                 var ed = formatDate(val["ed"]);
                     items.push(
-                        "<div class = \"cell\"> " +
-                        "<div style=\"width:25%; margin-right:2%; float:left; font-size:1em;  top: 50%; \">" +
+                        "<div class = \"cell\" id=\""+ val["id"] + "\">" +
+                        "<div class='sd' start='" + sd[3]+"' end='"+ ed[3] +"'>" +
                     sd[0] + "<br>"+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
-                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button> </div> " +
+                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"images/infobox_info_icon.svg.png\"></button>" +
+                   '<button class="icalBtn" val="' + val['id'] + '">i</button>  </div> ' +
                     "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
                     val["title"] +
                     "</div><div class=\"programSubtitle spaced\">" +
@@ -64,6 +67,10 @@ document.getElementById('aboutBtn').addEventListener('click',showAbout);
            for (var i = 0; i < btns.length; i++) {
                btns[i].addEventListener('click', showDescription, false);
            }
+           var icalBtns = document.getElementsByClassName('icalBtn');
+           for (var i = 0; i < btns.length; i++) {
+                icalBtns[i].addEventListener('click', exporttocal, false);
+            }
         });
     };
 

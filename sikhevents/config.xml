@@ -113,4 +113,7 @@
   <access origin="sikh.events*" />
   <access origin="http://sikh.events*" />
   <access origin="*" />
+  <plugin name="cordova-plugin-calendar" version="4.5.5" src="https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git">
+    <variable name="CALENDAR_USAGE_DESCRIPTION" value="Needed to allow you to add events to your calendar. " />
+  </plugin>
 </widget>

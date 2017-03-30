@@ -144,6 +144,9 @@ h1 {
   font-size:1.1em;
 
 }
+.sd {
+    width:25%; margin-right:2%; float:left; font-size:1em;  top: 50%; 
+}
 
 .header-bar {
     height: 40px;
