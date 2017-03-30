@@ -115,4 +115,5 @@
     <variable name="CALENDAR_USAGE_DESCRIPTION" value="Needed to allow you to add events to your calendar. " />
   </plugin>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.2" />
+  <plugin name="cordova-plugin-compat" version="1.1.0" />
 </widget>
