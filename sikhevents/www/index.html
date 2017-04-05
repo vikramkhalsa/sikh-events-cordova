@@ -5,30 +5,151 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://www.sikh.events/getprograms.php 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://www.sikh.events/getprograms.php http://www.isangat.org 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+       
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+        
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
         <title>sikhevents</title>
         <script src="scripts/scripts.js"></script>
     </head>
 <body>
+    
+<!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+<div class="panel panel-left panel-cover" style="background-color: white; opacity: 90">
+    <div class="content-block-title">Select Source</div>
+    <div class="list-block">
+        <ul>
+            <li class="link1">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">
+                            All Programs
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="link2">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">
+                            ekhalsa.com
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="page-content">
+        <p>Visit www.Sikh.events to add more programs.</p>
+    </div>
+</div>
+    <!-- Views-->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class-->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We have home navbar without left link-->
+                    <div class="left">
+                        <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                    </div>
+                    <div class="center sliding">Bay Area Kirtans</div>
+
+                </div>
+            </div>
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, data-page contains page name-->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content-->
+                    <div class="page-content main-list">
+                        <!-- <div class="content-block-title">Welcome To My Awesome App</div>
+                        <div class="content-block">
+                            <div class="content-block-inner">
+                                <p>Couple of worlds here because my app is so awesome!</p>
+                                <p>Duis sed erat ac eros ultrices pharetra id ut tellus. Praesent rhoncus enim ornare ipsum aliquet ultricies. Pellentesque sodales erat quis elementum sagittis.</p>
+                            </div>
+                        </div>
+                        <div class="content-block-title">What about simple navigation?</div>
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <a href="about.html" class="item-link">
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">About</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="services.html" class="item-link">
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">Services</div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form.html" class="item-link">
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">Form</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content-block-title">Side panels</div>
+                        <div class="content-block">
+                            <div class="row">
+                                <div class="col-50"><a href="#" data-panel="left" class="button open-panel">Left Panel</a></div>
+                                <div class="col-50"><a href="#" data-panel="right" class="button open-panel">Right Panel</a></div>
+                            </div>
+                        </div>-->
+                    </div>
+                  
+                </div>
+            </div>
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner"><a href="#" class="link">Link 1</a><a href="#" class="link">Link 2</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+<script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+<!--
 <div id="statusbar"></div>
 <div class="main-content">
     <div class="header-bar">Bay Area Kirtans <button id="aboutBtn">
             About
         </button>
-    </div>
+    </div>-->
     <!--<div id="deviceready" class="blink">
         <p class="event listening">Connecting to Device</p>
         <p class="event received">Device is Ready</p>
     </div>-->
     <!--<iframe src="http://www.isangat.org" style="width:100%; height:100%"/>-->
 
-</div>
+
 
 
 <script type="text/javascript" src="cordova.js"></script>

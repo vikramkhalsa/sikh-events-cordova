@@ -79,3 +79,40 @@ function exporttocal() {
     };
     window.plugins.calendar.createEventInteractively(title, addr, desc, startDate, endDate, success, error);
 }
+
+function showPage() {
+    $(".isangat").css("display", "block");
+    $(".sikhevents").css("display", "none");
+}
+
+function showlist() {
+    $(".isangat").css("display", "none");
+    $(".sikhevents").css("display", "block");
+
+}
+
+function createEvents(val, items,source) {
+    var desc = "";
+    if ("description" in val) {
+        desc = val["description"];
+    }
+    var sd = formatDate(val["sd"]);
+    var ed = formatDate(val["ed"]);
+    items.push(
+        "<div class='cell " + source + "' id='" + val["id"] + "'>" +
+        "<div class='sd' start='" + sd[3] + "' end='" + ed[3] + "'>" +
+    sd[0] + "<br>" + sd[1] + "<br><br>" + sd[2] + " to <br>" + ed[2] +
+   "<br><br><button class=\"infoBtn\" val='" + desc + "'><img class=\"info-btn\"src=\"css/images/icons-svg/info-black.svg\"></button>" +
+   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
+    "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
+    val["title"] +
+    "</div><div class=\"programSubtitle spaced\">" +
+    val["subtitle"] +
+    "</div> <div class=\"spaced\"> <a href=\"http://maps.google.com/?q=" +
+    val["address"] + "\">" +
+    val["address"] +
+    "</a></div>" +
+    val["phone"] + "<div class=\"spaced\">" +
+    "</div></div></div>"
+);
+}

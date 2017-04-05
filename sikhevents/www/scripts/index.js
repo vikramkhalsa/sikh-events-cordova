@@ -26,43 +26,40 @@
         //}
         //var targetUrl = "http://www.sikh.events";
         //var bkpLink = document.getElementById("bkpLink");
-        //bkpLink.setAttribute("href", targetUrl);
+        //bkpLink.setAttribute("href", targetUrl);  
         //bkpLink.text = targetUrl;
         //window.location.replace(targetUrl);
         document.body.classList.add(cordova.platformId);
         $.getJSON("http://www.sikh.events/getprograms.php?source=all", function (data) {
-
-            console.log("testing");
+            console.log("Loading sikhevents");
             var items = [];
             $.each(data, function (key, val) {
 
-
-                var sd = formatDate(val["sd"]);
-                var ed = formatDate(val["ed"]);
-                    items.push(
-                        "<div class = \"cell\" id=\""+ val["id"] + "\">" +
-                        "<div class='sd' start='" + sd[3]+"' end='"+ ed[3] +"'>" +
-                    sd[0] + "<br>"+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
-                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"css/images/icons-svg/info-black.svg\"></button>" +
-                   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
-                    "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
-                    val["title"] +
-                    "</div><div class=\"programSubtitle spaced\">" +
-                    val["subtitle"] +
-                    "</div> <div class=\"spaced\"> <a href=\"http://maps.google.com/?q=" +
-                    val["address"] + "\">" +
-                    val["address"] +
-                    "</a></div>" +
-                    val["phone"] + "<div class=\"spaced\">" +
-                    "</div></div></div>"
-                );
+                createEvents(val, items,"sikhevents");
             });
- 
-            $( "<div/>", {
+
+            $("<div/>", {
                 "class": "my-new-list",
-                html: items.join( "" )
-            }).appendTo(".main-content");
-document.getElementById('aboutBtn').addEventListener('click',showAbout);
+                html: items.join("")
+            }).appendTo(".main-list");
+
+        });
+
+        $.getJSON("http://www.isangat.org/json.php", function (data) {
+            console.log("loading isangat");
+            var items = [];
+            $.each(data.programs, function (key, val) {
+
+                createEvents(val, items,"isangat");
+            });
+
+            $("<div/>", {
+                "class": "my-new-list",
+                html: items.join("")
+            }).appendTo(".main-list");
+        });
+          
+//document.getElementById('aboutBtn').addEventListener('click',showAbout);
             var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
            for (var i = 0; i < btns.length; i++) {
                btns[i].addEventListener('click', showDescription, false);
@@ -78,7 +75,10 @@ document.getElementById('aboutBtn').addEventListener('click',showAbout);
                 $(".infoBtn").css("margin-right", "15px");
             }
 
-        });
+           // $(".isangat").css("display", "none");
+
+            $(".link1").on("click", showlist);
+            $(".link2").on("click", showPage);
     };
 
     function onPause() {
