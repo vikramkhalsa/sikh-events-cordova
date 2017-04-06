@@ -8,7 +8,7 @@
 function showDescription() {
     //alert(this.getAttribute("val"));
        navigator.notification.alert(
-        this.getAttribute("val"),  // message
+        descriptions[this.getAttribute("val")],  // message
         alertDismissed,         // callback
         'Description',            // title
         'OK'                  // buttonName
@@ -77,32 +77,38 @@ function exporttocal() {
     var error = function(message) {
         alert("Error: " + message);
     };
-    window.plugins.calendar.createEventInteractively(title, addr, desc, startDate, endDate, success, error);
+    window.plugins.calendar.createEventInteractively(title, addr, desc, startDate, endDate);
 }
 
 function showPage() {
     $(".isangat").css("display", "block");
     $(".sikhevents").css("display", "none");
+    myApp.closePanel();
 }
 
 function showlist() {
     $(".isangat").css("display", "none");
     $(".sikhevents").css("display", "block");
+    myApp.closePanel();
 
 }
 
-function createEvents(val, items,source) {
+var descriptions = {};
+
+function createEvents(val, items,source, visible) {
     var desc = "";
     if ("description" in val) {
         desc = val["description"];
     }
+    descriptions[val["id"]] = val["description"];
+
     var sd = formatDate(val["sd"]);
     var ed = formatDate(val["ed"]);
     items.push(
         "<div class='cell " + source + "' id='" + val["id"] + "'>" +
         "<div class='sd' start='" + sd[3] + "' end='" + ed[3] + "'>" +
     sd[0] + "<br>" + sd[1] + "<br><br>" + sd[2] + " to <br>" + ed[2] +
-   "<br><br><button class=\"infoBtn\" val='" + desc + "'><img class=\"info-btn\"src=\"css/images/icons-svg/info-black.svg\"></button>" +
+   "<br><br><button class='infoBtn' val='" + val['id'] + "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>" +
    '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
     "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
     val["title"] +
@@ -115,4 +121,6 @@ function createEvents(val, items,source) {
     val["phone"] + "<div class=\"spaced\">" +
     "</div></div></div>"
 );
+if (!visible)
+    $('.'+source).css("display", "none");
 }

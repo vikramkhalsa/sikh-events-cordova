@@ -6,7 +6,8 @@
     "use strict";
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
-    var descriptions;
+    //var descriptions = {};
+
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
         document.addEventListener( 'pause', onPause.bind( this ), false );
@@ -35,14 +36,15 @@
             var items = [];
             $.each(data, function (key, val) {
 
-                createEvents(val, items,"sikhevents");
+                createEvents(val, items,"sikhevents", true);
             });
 
             $("<div/>", {
                 "class": "my-new-list",
                 html: items.join("")
             }).appendTo(".main-list");
-
+            $(".infoBtn").on("click", showDescription);
+            $(".icalBtn").on('click', exporttocal);
         });
 
         $.getJSON("http://www.isangat.org/json.php", function (data) {
@@ -50,30 +52,33 @@
             var items = [];
             $.each(data.programs, function (key, val) {
 
-                createEvents(val, items,"isangat");
+                createEvents(val, items,"isangat", false);
             });
 
-            $("<div/>", {
+          $("<div/>", {
                 "class": "my-new-list",
                 html: items.join("")
             }).appendTo(".main-list");
+            // $(".infoBtn").on("click", showDescription);
+           // $(".icalBtn").on('click', exporttocal, false);
         });
           
 //document.getElementById('aboutBtn').addEventListener('click',showAbout);
-            var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
-           for (var i = 0; i < btns.length; i++) {
-               btns[i].addEventListener('click', showDescription, false);
-           }
-           var icalBtns = document.getElementsByClassName('icalBtn');
-           for (var i = 0; i < btns.length; i++) {
-                icalBtns[i].addEventListener('click', exporttocal, false);
-           }
+           // var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
+           //for (var i = 0; i < btns.length; i++) {
+           //    btns[i].addEventListener('click', showDescription, false);
+           //}
+           //var icalBtns = document.getElementsByClassName('icalBtn');
+           //for (var i = 0; i < btns.length; i++) {
+           //     icalBtns[i].addEventListener('click', exporttocal, false);
+           //}
             //only add margin between buttons if width is above a certain minimum, 
             //otherwise they go into 2 rows (iphones)
             var w = $(".sd").width();
             if (w > 80) {
                 $(".infoBtn").css("margin-right", "15px");
             }
+
 
            // $(".isangat").css("display", "none");
 
