@@ -89,8 +89,12 @@ function showPage() {
 }
 
 function showlist() {
+    var src = this.getAttribute("val");
     $(".isangat").css("display", "none");
-    $(".sikhevents").css("display", "block");
+    $(".sikhevents").css("display", "none");
+    $(".ekhalsa").css("display", "none");
+
+    $('.'+src).css("display", "block");
     myApp.closePanel();
 
 }
@@ -122,8 +126,10 @@ function createEvents(val, items,source) {
     items.push(
         "<div class='cell " + source + "' id='" + val["id"] + "'>" +
        timeStr + 
-   "<br><br><button class='infoBtn' val='" + val['id'] + "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>" +
-   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
+   "<br><br>" +
+        "<button class='infoBtn' val='" + val['id'] + "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>" +
+   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button> ' +
+    '</div> ' +
     "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
     val["title"] +
     "</div><div class=\"programSubtitle spaced\">" +

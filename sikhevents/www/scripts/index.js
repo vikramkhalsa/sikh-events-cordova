@@ -43,8 +43,8 @@
                 "class": "my-new-list",
                 html: items.join("")
             }).appendTo(".main-list");
-            $(".infoBtn").on("click", showDescription);
-            $(".icalBtn").on('click', exporttocal);
+            $(".sikhevents .infoBtn").on("click", showDescription);
+            $(".sikhevents .icalBtn").on('click', exporttocal);
         });
 
         $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
@@ -52,27 +52,36 @@
             var items = [];
             $.each(data.programs, function (key, val) {
 
-                createEvents(val, items,"isangat");
+                createEvents(val, items, "isangat");
             });
 
-          $("<div/>", {
+            $("<div/>", {
                 "class": "my-new-list",
                 html: items.join("")
-          }).appendTo(".main-list");
-          $('.isangat').css("display", "none");
+            }).appendTo(".main-list");
+            $('.isangat').css("display", "none");
+            $(".isangat .infoBtn").hide();
             // $(".infoBtn").on("click", showDescription);
-            $(".icalBtn").on('click', exporttocal, false);
+            $(".isangat .icalBtn").on('click', exporttocal);
+        });
+
+        $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa", function (data) {
+            console.log("loading ekhalsa");
+            var items = [];
+            $.each(data, function (key, val) {
+
+                createEvents(val, items, "ekhalsa");
+            });
+
+            $("<div/>", {
+                "class": "my-new-list",
+                html: items.join("")
+            }).appendTo(".main-list");
+            $(".ekhalsa").css("display", "none");
+            $(".ekhalsa .icalBtn").hide();
+            $(".ekhalsa .infoBtn").hide();
         });
           
-//document.getElementById('aboutBtn').addEventListener('click',showAbout);
-           // var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
-           //for (var i = 0; i < btns.length; i++) {
-           //    btns[i].addEventListener('click', showDescription, false);
-           //}
-           //var icalBtns = document.getElementsByClassName('icalBtn');
-           //for (var i = 0; i < btns.length; i++) {
-           //     icalBtns[i].addEventListener('click', exporttocal, false);
-           //}
             //only add margin between buttons if width is above a certain minimum, 
             //otherwise they go into 2 rows (iphones)
             var w = $(".sd").width();
@@ -83,8 +92,8 @@
 
            // $(".isangat").css("display", "none");
 
-            $(".link1").on("click", showlist);
-            $(".link2").on("click", showPage);
+            $(".navbtn").on("click", showlist);
+           // $(".link2").on("click", showPage);
     };
 
     function onPause() {
