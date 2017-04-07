@@ -42,7 +42,9 @@ function formatDate(d) {
         var time1 = dateArr[1].split(':');
         //-1 from month because its 0 based
         var dt = new Date(date1[0], date1[1]-1, date1[2], time1[0], time1[1], time1[2]);
-
+        if (isNaN(dt.getTime())) {
+            throw "Unable to convert date";
+        }
         var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         var day = days[dt.getDay()];
@@ -58,7 +60,7 @@ function formatDate(d) {
         var timestr = hrs + ":" + mins + " " + ampm;
         return [day, datestr, timestr,dt];
     } catch (ex) {
-        return d; //if parsing/formatting failed, just show original date as is
+        return false; //if parsing/formatting failed, just show original date as is
     }
 }
 
@@ -95,19 +97,31 @@ function showlist() {
 
 var descriptions = {};
 
-function createEvents(val, items,source, visible) {
+function createEvents(val, items,source) {
     var desc = "";
     if ("description" in val) {
         desc = val["description"];
     }
     descriptions[val["id"]] = val["description"];
 
-    var sd = formatDate(val["sd"]);
-    var ed = formatDate(val["ed"]);
+    var sd = val["sd"];
+    var ed = val["ed"];
+    var timeStr= "";
+    var s = formatDate(val["sd"]);
+    var e = formatDate(val["ed"]);
+    if (s) {
+        sd = s;
+        if (e)
+            ed = e;
+        timeStr = "<div class='sd' start='" + sd[3] + "' end='" + ed[3] + "'>" +
+           sd[0] + "<br>" + sd[1] + "<br><br>" + sd[2] + " to <br>" + ed[2];
+    }else {
+        timeStr = "<div class='sd'>" + sd + " to <br>" + ed;
+        }
+
     items.push(
         "<div class='cell " + source + "' id='" + val["id"] + "'>" +
-        "<div class='sd' start='" + sd[3] + "' end='" + ed[3] + "'>" +
-    sd[0] + "<br>" + sd[1] + "<br><br>" + sd[2] + " to <br>" + ed[2] +
+       timeStr + 
    "<br><br><button class='infoBtn' val='" + val['id'] + "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>" +
    '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
     "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
@@ -121,6 +135,4 @@ function createEvents(val, items,source, visible) {
     val["phone"] + "<div class=\"spaced\">" +
     "</div></div></div>"
 );
-if (!visible)
-    $('.'+source).css("display", "none");
 }

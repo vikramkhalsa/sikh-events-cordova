@@ -30,13 +30,13 @@
         //bkpLink.setAttribute("href", targetUrl);  
         //bkpLink.text = targetUrl;
         //window.location.replace(targetUrl);
-        document.body.classList.add(cordova.platformId);
-        $.getJSON("http://www.sikh.events/getprograms.php?source=all", function (data) {
+        //document.body.classList.add(cordova.platformId);
+        $.getJSON("http://www.sikh.events/getprograms.php", function (data) {
             console.log("Loading sikhevents");
             var items = [];
             $.each(data, function (key, val) {
 
-                createEvents(val, items,"sikhevents", true);
+                createEvents(val, items,"sikhevents");
             });
 
             $("<div/>", {
@@ -47,20 +47,21 @@
             $(".icalBtn").on('click', exporttocal);
         });
 
-        $.getJSON("http://www.isangat.org/json.php", function (data) {
+        $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
             console.log("loading isangat");
             var items = [];
             $.each(data.programs, function (key, val) {
 
-                createEvents(val, items,"isangat", false);
+                createEvents(val, items,"isangat");
             });
 
           $("<div/>", {
                 "class": "my-new-list",
                 html: items.join("")
-            }).appendTo(".main-list");
+          }).appendTo(".main-list");
+          $('.isangat').css("display", "none");
             // $(".infoBtn").on("click", showDescription);
-           // $(".icalBtn").on('click', exporttocal, false);
+            $(".icalBtn").on('click', exporttocal, false);
         });
           
 //document.getElementById('aboutBtn').addEventListener('click',showAbout);
