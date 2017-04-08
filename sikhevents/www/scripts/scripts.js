@@ -89,7 +89,12 @@ function showPage() {
 }
 
 function showlist() {
+    $('.navbtn').css("background-color", "white");
+
+    $(this).css("background-color", "#bcd4ec");
+    $('#headerTitle').html($(this).find(".item-title").html());
     var src = this.getAttribute("val");
+
     $(".isangat").css("display", "none");
     $(".sikhevents").css("display", "none");
     $(".ekhalsa").css("display", "none");
@@ -134,7 +139,7 @@ function createEvents(val, items,source) {
     val["title"] +
     "</div><div class=\"programSubtitle spaced\">" +
     val["subtitle"] +
-    "</div> <div class=\"spaced\"> <a href=\"http://maps.google.com/?q=" +
+    "</div> <div class=\"spaced\"> <a href=\"geo://?q=" +
     val["address"] + "\">" +
     val["address"] +
     "</a></div>" +

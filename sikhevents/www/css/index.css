@@ -68,7 +68,7 @@ h1 {
     padding:2px 0px;
 }
 
-.event.listening {
+/*.event.listening {
     background-color:#333333;
     display:block;
 }
@@ -76,7 +76,7 @@ h1 {
 .event.received {
     background-color:#4B946A;
     display:none;
-}
+}*/
 
 @keyframes fade {
     from { opacity: 1.0; }
@@ -103,9 +103,9 @@ h1 {
     min-height: 130px;
 }
 
-    .cell:hover {
+    /*.cell:hover {
         background-color: #bcd4ec;
-    }
+    }*/
 
     #aboutBtn {
         border-width: 0;
