@@ -75,11 +75,12 @@ function exporttocal() {
     var desc = cell.find('.infoBtn').attr("val");
     var end = cell.find('.sd').attr("end");
     var endDate = new Date(end);
-    var success = function(message) { alert("Success: " + JSON.stringify(message)); };
-    var error = function(message) {
-        alert("Error: " + message);
+    var success = function (message) { //alert("Success: " + JSON.stringify(message)); 
     };
-    window.plugins.calendar.createEventInteractively(title, addr, desc, startDate, endDate);
+    var error = function(message) {
+        //alert("Error: " + message);
+    };
+    window.plugins.calendar.createEventInteractively(title, addr, desc, startDate, endDate, success, error);
 }
 
 function showPage() {
@@ -139,11 +140,11 @@ function createEvents(val, items,source) {
     val["title"] +
     "</div><div class=\"programSubtitle spaced\">" +
     val["subtitle"] +
-    "</div> <div class=\"spaced\"> <a href=\"geo://?q=" +
-    val["address"] + "\">" +
+    "</div> <div class='spaced'> <a href='geo://?q=" +
+    val["address"] + "'>" +
     val["address"] +
     "</a></div>" +
-    val["phone"] + "<div class=\"spaced\">" +
+    val["phone"] + "<div class='spaced'>" +
     "</div></div></div>"
 );
 }
