@@ -94,6 +94,11 @@
 
             $(".navbtn").on("click", showlist);
            // $(".link2").on("click", showPage);
+
+           // Open map links with InAppBrowser
+           $('body').on('click', '.map-link', function(e) {
+                systemLink($(this).attr('href'));
+           });
     };
 
     function onPause() {

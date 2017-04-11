@@ -116,5 +116,5 @@
   </plugin>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.2" />
   <plugin name="cordova-plugin-compat" version="1.1.0" />
-  <access origin="geo://?q=*" />
+  <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
 </widget>
