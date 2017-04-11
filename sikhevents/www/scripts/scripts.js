@@ -140,11 +140,15 @@ function createEvents(val, items,source) {
     val["title"] +
     "</div><div class=\"programSubtitle spaced\">" +
     val["subtitle"] +
-    "</div> <div class='spaced'> <a href='geo://?q=" +
-    val["address"] + "'>" +
+    "</div> <div class='spaced'> <a href='maps://?q=" +
+    val["address"] + "' class=\"map-link\">" +
     val["address"] +
     "</a></div>" +
     val["phone"] + "<div class='spaced'>" +
     "</div></div></div>"
 );
+}
+
+function systemLink(url) {
+  cordova.InAppBrowser.open(url, '_system');
 }
