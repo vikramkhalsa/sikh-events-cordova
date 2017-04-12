@@ -31,6 +31,9 @@
         //bkpLink.text = targetUrl;
         //window.location.replace(targetUrl);
         //document.body.classList.add(cordova.platformId);
+
+        $('#aboutBtn').click(showAbout);
+
         $.getJSON("http://www.sikh.events/getprograms.php", function (data) {
             console.log("Loading sikhevents");
             var items = [];
@@ -89,11 +92,7 @@
                 $(".infoBtn").css("margin-right", "15px");
             }
 
-
-           // $(".isangat").css("display", "none");
-
             $(".navbtn").on("click", showlist);
-           // $(".link2").on("click", showPage);
 
            // Open map links with InAppBrowser
            $('body').on('click', '.map-link', function(e) {

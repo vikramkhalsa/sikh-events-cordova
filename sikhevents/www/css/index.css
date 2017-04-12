@@ -108,13 +108,15 @@ h1 {
     }*/
 
     #aboutBtn {
-        border-width: 0;
-        background-color: transparent;
+        /*border-width: 0;
+        background-color: transparent;*/
         position: absolute;
-        right: 20px;
-                font-size: 15px;
-        color: white;
-        line-height: 40px;
+        bottom: 5px;
+        /*font-size: 18px;
+        color: black;*/
+        /*line-height: 40px;*/
+        margin: 15px;
+        width: 85%;
     }
 
     .infoBtn {
