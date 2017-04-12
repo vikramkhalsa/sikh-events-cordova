@@ -4,22 +4,21 @@
 //});
 
 
-
+//show a specific event's description
 function showDescription() {
-    //alert(this.getAttribute("val"));
        navigator.notification.alert(
         descriptions[this.getAttribute("val")],  // message
         alertDismissed,         // callback
         'Description',            // title
         'OK'                  // buttonName
     );
-    //'" + val["description"] + "'
 }
 
 function alertDismissed() {
     // do something
 }
 
+//show info about the app in a popup/alert
 function showAbout() {
     var msg = "Sikh Events is an app which will show Kirtan programs from around the world in one location. " +
         "Initially programs will be limited to the Bay Area, California but will be expanded to include other cities and countries. " +
@@ -33,6 +32,7 @@ function showAbout() {
   );
 }
 
+//parse date into js object, return array of date split into parts for displaying
 function formatDate(d) {
     try
     {
@@ -64,7 +64,7 @@ function formatDate(d) {
     }
 }
 
- 
+ //export event to system calendar
 function exporttocal() {
     var id = this.getAttribute("val");
     var cell = $('#' + id);
@@ -72,7 +72,7 @@ function exporttocal() {
     var addr = cell.find('a').html();
     var start = cell.find('.sd').attr("start");
     var startDate = new Date(start);
-    var desc = cell.find('.infoBtn').attr("val");
+    var desc = descriptions[id];
     var end = cell.find('.sd').attr("end");
     var endDate = new Date(end);
     var success = function (message) { //alert("Success: " + JSON.stringify(message)); 
@@ -93,7 +93,7 @@ function showlist() {
     $('.navbtn').css("background-color", "white");
 
     $(this).css("background-color", "#bcd4ec");
-    $('#headerTitle').html($(this).find(".item-title").html());
+    $('#headerTitle').text($(this).find(".item-title").text());
     var src = this.getAttribute("val");
 
     $(".isangat").css("display", "none");

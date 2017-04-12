@@ -34,6 +34,7 @@
 
         $('#aboutBtn').click(showAbout);
 
+        //load events from sikh.events
         $.getJSON("http://www.sikh.events/getprograms.php", function (data) {
             console.log("Loading sikhevents");
             var items = [];
@@ -50,6 +51,7 @@
             $(".sikhevents .icalBtn").on('click', exporttocal);
         });
 
+        //load from isangat
         $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
             console.log("loading isangat");
             var items = [];
@@ -68,6 +70,7 @@
             $(".isangat .icalBtn").on('click', exporttocal);
         });
 
+        //load from ekhalsa
         $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa", function (data) {
             console.log("loading ekhalsa");
             var items = [];
