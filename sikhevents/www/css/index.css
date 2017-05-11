@@ -108,15 +108,12 @@ h1 {
     }*/
 
     #aboutBtn {
-        /*border-width: 0;
-        background-color: transparent;*/
         position: absolute;
         bottom: 5px;
-        /*font-size: 18px;
-        color: black;*/
-        /*line-height: 40px;*/
         margin: 15px;
         width: 85%;
+            color: #ebaa2d !important;
+    border-color: #ebaa2d !important;
     }
 
     .infoBtn {
@@ -176,6 +173,27 @@ h1 {
 .info-btn {
     height: 20px;
     width: 20px;
+}
+
+.navbtn {
+    color: white;
+    background-color: #1c2e4a;
+}
+
+a {
+  color: #3F51B5 !important;
+}
+
+.bottom-panel {
+    padding: 15px; 
+    position: absolute; 
+    bottom: 0; 
+    background: #373737; 
+    color: white
+}
+
+.bottom-panel a {
+    color: #ebaa2d !important;
 }
 
 #statusbar { display: none;} 

@@ -90,9 +90,9 @@ function showPage() {
 }
 
 function showlist() {
-    $('.navbtn').css("background-color", "white");
+    $('.navbtn').css("background-color", "#1c2e4a");
 
-    $(this).css("background-color", "#bcd4ec");
+    $(this).css("background-color", "#466eb4");
     $('#headerTitle').text($(this).find(".item-title").text());
     var src = this.getAttribute("val");
 
