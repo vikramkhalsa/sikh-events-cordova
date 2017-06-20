@@ -6,8 +6,11 @@
 
 //show a specific event's description
 function showDescription() {
+    var desc = descriptions[this.getAttribute("val")];
+    desc = desc.replace(/<br>/g, '\n');
+    desc = desc.replace(/<.?b>/g, '');
        navigator.notification.alert(
-        descriptions[this.getAttribute("val")],  // message
+        desc,  // message
         alertDismissed,         // callback
         'Description',            // title
         'OK'                  // buttonName
@@ -96,11 +99,21 @@ function showlist() {
     $('#headerTitle').text($(this).find(".item-title").text());
     var src = this.getAttribute("val");
 
-    $(".isangat").css("display", "none");
-    $(".sikhevents").css("display", "none");
-    $(".ekhalsa").css("display", "none");
+    if (src === "sikhevents") {
+        getEvents("");
+    }
+    else if (src === "isangat") {
+        getiSangat();
 
-    $('.'+src).css("display", "block");
+    } else if (src === "ekhalsa") {
+        geteKhalsa();
+    }
+
+    //$(".isangat").css("display", "none");
+    //$(".sikhevents").css("display", "none");
+    //$(".ekhalsa").css("display", "none");
+
+    //$('.'+src).css("display", "block");
     myApp.closePanel();
 
 }
@@ -152,3 +165,87 @@ function createEvents(val, items,source) {
 function systemLink(url) {
   cordova.InAppBrowser.open(url, '_system');
 }
+
+
+function getEvents(querystr) {
+    var eventurl = "http://www.sikh.events/getprograms.php";
+    $.getJSON(eventurl + querystr,
+        function(data) {
+            console.log("Loading sikhevents");
+            var items = [];
+            $.each(data,
+                function(key, val) {
+                    createEvents(val, items, "sikhevents");
+                });
+
+            $(".main-list")
+                .html($("<div/>",
+                {
+                    "class": "my-new-list",
+                    html: items.join("")
+                }));
+            $(".sikhevents .infoBtn").on("click", showDescription);
+            //$$('.sikhevents .infoBtn').on('click', function () {
+            //    var popupHTML = '<div class="popup">' +
+            //        '<div class="content-block">' +
+            //        '<p><a href="#" class="close-popup">Close me</a></p>' +
+            //        '<img src="http://www.sikh.events/images/sikhevents_site_text_small.png"  width="100%"/>' +
+            //        '</div>' +
+            //        '</div>';
+            //    myApp.popup(popupHTML);
+            //});
+            $(".sikhevents .icalBtn").on('click', exporttocal);
+        });
+}
+
+function getiSangat() {
+    //load from isangat
+    $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
+        console.log("loading isangat");
+        var items = [];
+        $.each(data.programs, function (key, val) {
+
+            createEvents(val, items, "isangat");
+        });
+
+        $(".main-list").html($("<div/>",
+         {
+             "class": "my-new-list",
+             html: items.join("")
+         }));
+
+        //$(".infoBtn").hide();
+        $(".infoBtn").on("click", showDescription);
+        $(".icalBtn").on('click', exporttocal);
+    });
+}
+
+function geteKhalsa() {
+
+    //load from ekhalsa
+    $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa",
+        function(data) {
+            console.log("loading ekhalsa");
+            var items = [];
+            $.each(data,
+                function(key, val) {
+
+                    createEvents(val, items, "ekhalsa");
+                });
+
+            $(".main-list")
+                .html($("<div/>",
+                {
+                    "class": "my-new-list",
+                    html: items.join("")
+                }));
+
+            // $(".ekhalsa").css("display", "none");
+            $(".icalBtn").hide();
+            $(".infoBtn").hide();
+        });
+}
+
+
+
+

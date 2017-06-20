@@ -39,7 +39,6 @@
             console.log("Loading sikhevents");
             var items = [];
             $.each(data, function (key, val) {
-
                 createEvents(val, items,"sikhevents");
             });
 
@@ -48,45 +47,18 @@
                 html: items.join("")
             }).appendTo(".main-list");
             $(".sikhevents .infoBtn").on("click", showDescription);
+            //$$('.sikhevents .infoBtn').on('click', function () {
+            //    var popupHTML = '<div class="popup">' +
+            //        '<div class="content-block">' +
+            //        '<p><a href="#" class="close-popup">Close me</a></p>' +
+            //        '<img src="http://www.sikh.events/images/sikhevents_site_text_small.png"  width="100%"/>' +
+            //        '</div>' +
+            //        '</div>';
+            //    myApp.popup(popupHTML);
+            //});
             $(".sikhevents .icalBtn").on('click', exporttocal);
         });
 
-        //load from isangat
-        $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
-            console.log("loading isangat");
-            var items = [];
-            $.each(data.programs, function (key, val) {
-
-                createEvents(val, items, "isangat");
-            });
-
-            $("<div/>", {
-                "class": "my-new-list",
-                html: items.join("")
-            }).appendTo(".main-list");
-            $('.isangat').css("display", "none");
-            $(".isangat .infoBtn").hide();
-            // $(".infoBtn").on("click", showDescription);
-            $(".isangat .icalBtn").on('click', exporttocal);
-        });
-
-        //load from ekhalsa
-        $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa", function (data) {
-            console.log("loading ekhalsa");
-            var items = [];
-            $.each(data, function (key, val) {
-
-                createEvents(val, items, "ekhalsa");
-            });
-
-            $("<div/>", {
-                "class": "my-new-list",
-                html: items.join("")
-            }).appendTo(".main-list");
-            $(".ekhalsa").css("display", "none");
-            $(".ekhalsa .icalBtn").hide();
-            $(".ekhalsa .infoBtn").hide();
-        });
           
             //only add margin between buttons if width is above a certain minimum, 
             //otherwise they go into 2 rows (iphones)
@@ -100,6 +72,41 @@
            // Open map links with InAppBrowser
            $('body').on('click', '.map-link', function(e) {
                 systemLink($(this).attr('href'));
+           });
+
+
+        //add filter buttons
+           $$('#filter').on('click', function () {
+               var buttons = [
+                   {
+                       text: 'All Events',
+                       onClick: function () {
+                           getEvents("");
+                       }
+                   },
+                   {
+                       text: 'Kirtan',
+                       onClick: function () {
+                           getEvents("?type=kirtan");
+                       }
+                   },
+                   {
+                       text: 'Katha',
+                       onClick: function () {
+                           getEvents("?type=katha");
+                       }
+                   },
+                    {
+                        text: 'Camp',
+                        onClick: function () {
+                            getEvents("?type=camp");
+                        }
+                    },
+                   {
+                       text: 'Cancel'
+                   }
+               ];
+               myApp.actions(buttons);
            });
     };
 

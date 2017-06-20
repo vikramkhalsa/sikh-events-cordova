@@ -5,7 +5,7 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src maps: http://www.sikh.events">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src *; connect-src maps: http://www.sikh.events">
         
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
@@ -67,6 +67,13 @@
     <button id="aboutBtn" class="button">
         About
     </button>
+    <a href="#" data-popup=".popup" class="open-popup">Open About Popup </a>
+    <div class="popup">
+        Image
+        <a href="#" class="close-popup">Close popup</a>
+        <img src="images/Icon-App-76x76@2x.png" width="100%"/>
+    </div>
+
 </div>
     <!-- Views-->
     <div class="views">
@@ -80,6 +87,9 @@
                         <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
                     </div>
                     <div id="headerTitle" class="center">Bay Area Kirtans</div>
+                    <div class="right">
+                        <a href="#" id="filter" class="link">filter <i class="icon icon-bars"></i></a>
+                    </div>
                     </div>
             </div>
             <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
