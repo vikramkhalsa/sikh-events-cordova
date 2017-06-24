@@ -6,7 +6,7 @@
 
 //show a specific event's description
 function showDescription() {
-    var desc = descriptions[this.getAttribute("val")];
+    var desc = events[this.getAttribute("val")].description;
     desc = desc.replace(/<br>/g, '\n');
     desc = desc.replace(/<.?b>/g, '');
        navigator.notification.alert(
@@ -23,9 +23,8 @@ function alertDismissed() {
 
 //show info about the app in a popup/alert
 function showAbout() {
-    var msg = "Sikh Events is an app which will show Kirtan programs from around the world in one location. " +
-        "Initially programs will be limited to the Bay Area, California but will be expanded to include other cities and countries. " +
-        "We also plan to allow other sikh events in the future. " +
+    var msg = "Sikh Events is a platform which shows Kirtan programs and other Sikh events from around the world in one convenient location. " +
+        "We are continuously adding support for more regions and different locations" +
         "To submit a program, please visit the website: www.sikh.events";
     navigator.notification.alert(
       msg,  // message
@@ -75,7 +74,7 @@ function exporttocal() {
     var addr = cell.find('a').html();
     var start = cell.find('.sd').attr("start");
     var startDate = new Date(start);
-    var desc = descriptions[id];
+    var desc = events[this.getAttribute("val")].description;
     var end = cell.find('.sd').attr("end");
     var endDate = new Date(end);
     var success = function (message) { //alert("Success: " + JSON.stringify(message)); 
@@ -107,6 +106,8 @@ function showlist() {
 
     } else if (src === "ekhalsa") {
         geteKhalsa();
+    } else {
+        getEvents("?region="+src);
     }
 
     //$(".isangat").css("display", "none");
@@ -118,14 +119,24 @@ function showlist() {
 
 }
 
-var descriptions = {};
+var events = {};
 
 function createEvents(val, items,source) {
     var desc = "";
     if ("description" in val) {
         desc = val["description"];
     }
-    descriptions[val["id"]] = val["description"];
+    events[val['id']] = val;
+    var imagebutton = "";
+    if (val["imageurl"]) {
+        imagebutton = '<a class="imageBtn"href="#" val=' + val['id'] +
+            '>View Poster</a>';
+        
+        //imagebutton = "<button class='imageBtn iconBtn' val='" +
+        //    val['id'] +
+        //    "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>";
+    }
+   
 
     var sd = val["sd"];
     var ed = val["ed"];
@@ -146,8 +157,8 @@ function createEvents(val, items,source) {
         "<div class='cell " + source + "' id='" + val["id"] + "'>" +
        timeStr + 
    "<br><br>" +
-        "<button class='infoBtn' val='" + val['id'] + "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>" +
-   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button> ' +
+        "<button class='infoBtn iconBtn' val='" + val['id'] + "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>" +
+   '<button class="icalBtn iconBtn" val="' + val['id'] + '"><img class="info-btn" src="css/images/icons-svg/calendar-black.svg"></button> ' +
     '</div> ' +
     "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
     val["title"] +
@@ -157,7 +168,7 @@ function createEvents(val, items,source) {
     val["address"] + "' class=\"map-link\">" +
     val["address"] +
     "</a></div>" +
-    val["phone"] + "<div class='spaced'>" +
+    val["phone"] + imagebutton + "<div class='spaced'>" +
     "</div></div></div>"
 );
 }
@@ -168,6 +179,9 @@ function systemLink(url) {
 
 
 function getEvents(querystr) {
+
+    events = {};
+
     var eventurl = "http://www.sikh.events/getprograms.php";
     $.getJSON(eventurl + querystr,
         function(data) {
@@ -175,7 +189,7 @@ function getEvents(querystr) {
             var items = [];
             $.each(data,
                 function(key, val) {
-                    createEvents(val, items, "sikhevents");
+                    createEvents(val, items, "sikhevents");                
                 });
 
             $(".main-list")
@@ -184,17 +198,21 @@ function getEvents(querystr) {
                     "class": "my-new-list",
                     html: items.join("")
                 }));
-            $(".sikhevents .infoBtn").on("click", showDescription);
-            //$$('.sikhevents .infoBtn').on('click', function () {
-            //    var popupHTML = '<div class="popup">' +
-            //        '<div class="content-block">' +
-            //        '<p><a href="#" class="close-popup">Close me</a></p>' +
-            //        '<img src="http://www.sikh.events/images/sikhevents_site_text_small.png"  width="100%"/>' +
-            //        '</div>' +
-            //        '</div>';
-            //    myApp.popup(popupHTML);
-            //});
-            $(".sikhevents .icalBtn").on('click', exporttocal);
+            $(".infoBtn").on("click", showDescription);
+            $(".icalBtn").on('click', exporttocal);
+            $$('.imageBtn').on('click', function () {
+                    var id = this.getAttribute("val");
+                    var title = events[id].title;
+                    var url = events[id].imageurl;
+                    var popupHTML = '<div class="popup">' +
+                        '<div class="content-block">' +
+                        '<p><a style="float:right" href="#" class="close-popup">Close</a></p><h3>' +
+                        title +
+                        '</h3><img src="' + url + '"  width="100%"/>' +
+                        '</div>' +
+                        '</div>';
+                    myApp.popup(popupHTML);
+                });
         });
 }
 

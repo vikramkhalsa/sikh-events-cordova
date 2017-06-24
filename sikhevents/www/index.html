@@ -33,16 +33,21 @@
         <img src="images/Icon-App-76x76@2x.png" width="25%" style="padding: 5%; vertical-align: middle"/>
         <img src="images/sikhevents_text_small.png" width="57%" style="vertical-align: middle"/>
     </div>
-    <div class="content-block-title">Select Source</div>
-    <div class="list-block">
-        <ul>
+    <div class="content-block-title">Regions</div>
+    <div class="list-block" >
+        <ul id="regions">
             <li class="navbtn" val="sikhevents">
                 <div class="item-content">
                     <div class="item-inner">
-                        <div class="item-title">Sikh.Events</div>
+                        <div class="item-title">All Areas</div>
                     </div>
                 </div>
             </li>
+        </ul>
+    </div>
+    <div class="content-block-title">Other Sources</div>
+    <div class="list-block">
+        <ul>
             <li class="navbtn" val="isangat">
                 <div class="item-content">
                     <div class="item-inner">
@@ -61,13 +66,15 @@
     </div>
  
     <div class="bottom-panel">
-        <div style="margin-bottom: 45px">        Available sources and locations for programs will show up here. <br />
-            Visit <a href="http://www.sikh.events">www.Sikh.events</a> to submit events.</div>
+        <div style="margin-bottom: 15px">
+            <button id="aboutBtn" class="button">
+                About
+            </button>
+            Available sources and locations for programs will show up here. <br/>
+            Visit <a href="http://www.sikh.events">www.Sikh.events</a> to submit events.
+        </div>
     </div>
-    <button id="aboutBtn" class="button">
-        About
-    </button>
-    <a href="#" data-popup=".popup" class="open-popup">Open About Popup </a>
+    <!--<a href="#" data-popup=".popup" class="open-popup">Open About Popup </a>-->
     <div class="popup">
         Image
         <a href="#" class="close-popup">Close popup</a>
@@ -84,11 +91,11 @@
                 <div class="navbar-inner">
                     <!-- We have home navbar without left link-->
                     <div class="left">
-                        <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                        <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"><img src="css/images/icons-svg/bars-black.svg"  width="24" height="24" /></a>
                     </div>
-                    <div id="headerTitle" class="center">Bay Area Kirtans</div>
+                    <div id="headerTitle" class="center">Sikh Events</div>
                     <div class="right">
-                        <a href="#" id="filter" class="link">filter <i class="icon icon-bars"></i></a>
+                        <a href="#" id="filter" class="link icon-only"><img id="filtericon" src="css/images/icons-svg/filter_list_48px.svg" width="30" height="30"/></a>
                     </div>
                     </div>
             </div>

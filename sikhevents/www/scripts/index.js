@@ -35,29 +35,33 @@
         $('#aboutBtn').click(showAbout);
 
         //load events from sikh.events
-        $.getJSON("http://www.sikh.events/getprograms.php", function (data) {
-            console.log("Loading sikhevents");
-            var items = [];
-            $.each(data, function (key, val) {
-                createEvents(val, items,"sikhevents");
-            });
+        getEvents("");
+        //$.getJSON("http://www.sikh.events/getprograms.php", function (data) {
+        //    console.log("Loading sikhevents");
+        //    var items = [];
+        //    $.each(data, function (key, val) {
+        //        createEvents(val, items,"sikhevents");
+        //    });
 
-            $("<div/>", {
-                "class": "my-new-list",
-                html: items.join("")
-            }).appendTo(".main-list");
-            $(".sikhevents .infoBtn").on("click", showDescription);
-            //$$('.sikhevents .infoBtn').on('click', function () {
-            //    var popupHTML = '<div class="popup">' +
-            //        '<div class="content-block">' +
-            //        '<p><a href="#" class="close-popup">Close me</a></p>' +
-            //        '<img src="http://www.sikh.events/images/sikhevents_site_text_small.png"  width="100%"/>' +
-            //        '</div>' +
-            //        '</div>';
-            //    myApp.popup(popupHTML);
-            //});
-            $(".sikhevents .icalBtn").on('click', exporttocal);
-        });
+        //    $("<div/>", {
+        //        "class": "my-new-list",
+        //        html: items.join("")
+        //    }).appendTo(".main-list");
+        //    $(".sikhevents .infoBtn").on("click", showDescription);
+        //    $$('.sikhevents .icalBtn').on('click', function () {
+
+        //        var id = this.getAttribute("val");
+        //        var url = images[id];
+        //        var popupHTML = '<div class="popup">' +
+        //            '<div class="content-block">' +
+        //            '<p><a href="#" class="close-popup">Close</a></p>' +
+        //            '<img src="'+url +'"  width="100%"/>' +
+        //            '</div>' +
+        //            '</div>';
+        //        myApp.popup(popupHTML);
+        //    });
+        //    //$(".sikhevents .icalBtn").on('click', exporttocal);
+        //});
 
           
             //only add margin between buttons if width is above a certain minimum, 
@@ -67,13 +71,30 @@
                 $(".infoBtn").css("margin-right", "15px");
             }
 
-            $(".navbtn").on("click", showlist);
-
            // Open map links with InAppBrowser
            $('body').on('click', '.map-link', function(e) {
                 systemLink($(this).attr('href'));
            });
 
+
+        //load and add regions
+           $.getJSON("http://www.sikh.events/getlocations.php?regions=current", function (data) {
+               console.log("Loading Regions");
+               var regions = {};
+               //alert(data);
+               $.each(data, function (key, val) {
+                   regions[val["name"]] = val["regionid"];
+
+                   $('#regions').append('<li class="navbtn" val="' + 
+                            val["regionid"] +
+                           '"><div class="item-content"><div class="item-inner"><div class="item-title">'+
+                           val["name"]+  
+                        '</div></div></div></li>');
+               });
+
+               //add click handler for region/source buttons
+               $(".navbtn").on("click", showlist);
+           });
 
         //add filter buttons
            $$('#filter').on('click', function () {
@@ -82,12 +103,14 @@
                        text: 'All Events',
                        onClick: function () {
                            getEvents("");
+                           $('#filtericon').css('background-color', 'transparent');
                        }
                    },
                    {
                        text: 'Kirtan',
                        onClick: function () {
                            getEvents("?type=kirtan");
+                           $('#filtericon').css('background-color', 'lightgrey');
                        }
                    },
                    {

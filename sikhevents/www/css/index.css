@@ -108,20 +108,14 @@ h1 {
     }*/
 
     #aboutBtn {
-        position: absolute;
-        bottom: 5px;
+        
         margin: 15px;
         width: 85%;
             color: #ebaa2d !important;
     border-color: #ebaa2d !important;
     }
 
-    .infoBtn {
-  padding: 5px 5px 0px 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 50%;
-  background-color: white;
+ .infoBtn {
         margin-right: 4px;
 }
 
@@ -129,7 +123,8 @@ h1 {
   background-color: #AAA;
 }
 
-.icalBtn {
+
+.iconBtn {
   padding: 5px 5px 0px 5px;
   border-style: solid;
   border-width: 1px;
@@ -137,8 +132,12 @@ h1 {
   background-color: white;
 }
 
-.icalBtn:hover{
-  background-color: #AAA;
+.iconBtn:hover {
+     background-color: #AAA;
+}
+
+.imageBtn {
+    float: right;
 }
 
 .spaced {
@@ -186,8 +185,8 @@ a {
 
 .bottom-panel {
     padding: 15px; 
-    position: absolute; 
-    bottom: 0; 
+    /*position: absolute; 
+    bottom: 0;*/ 
     background: #373737; 
     color: white
 }
