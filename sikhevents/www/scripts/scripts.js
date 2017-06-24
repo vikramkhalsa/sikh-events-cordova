@@ -131,12 +131,7 @@ function createEvents(val, items,source) {
     if (val["imageurl"]) {
         imagebutton = '<a class="imageBtn"href="#" val=' + val['id'] +
             '>View Poster</a>';
-        
-        //imagebutton = "<button class='imageBtn iconBtn' val='" +
-        //    val['id'] +
-        //    "'><img class='info-btn' src='css/images/icons-svg/info-black.svg'></button>";
     }
-   
 
     var sd = val["sd"];
     var ed = val["ed"];
@@ -179,9 +174,7 @@ function systemLink(url) {
 
 
 function getEvents(querystr) {
-
     events = {};
-
     var eventurl = "http://www.sikh.events/getprograms.php";
     $.getJSON(eventurl + querystr,
         function(data) {
@@ -217,6 +210,9 @@ function getEvents(querystr) {
 }
 
 function getiSangat() {
+
+    events = {};
+
     //load from isangat
     $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
         console.log("loading isangat");
@@ -239,6 +235,7 @@ function getiSangat() {
 }
 
 function geteKhalsa() {
+    events = {};
 
     //load from ekhalsa
     $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa",
@@ -261,6 +258,36 @@ function geteKhalsa() {
             // $(".ekhalsa").css("display", "none");
             $(".icalBtn").hide();
             $(".infoBtn").hide();
+        });
+}
+
+function filterevents(type) {
+    var items = [];
+    $.each(events,function (key, val) {
+                       if (val.type == type||type === "") {                         
+                           createEvents(val, items, "sikhevents");
+                       }
+                    });
+        $(".main-list")
+            .html($("<div/>",
+            {
+                "class": "my-new-list",
+                html: items.join("")
+            }));
+        $(".infoBtn").on("click", showDescription);
+        $(".icalBtn").on('click', exporttocal);
+        $$('.imageBtn').on('click', function () {
+            var id = this.getAttribute("val");
+            var title = events[id].title;
+            var url = events[id].imageurl;
+            var popupHTML = '<div class="popup">' +
+                '<div class="content-block">' +
+                '<p><a style="float:right" href="#" class="close-popup">Close</a></p><h3>' +
+                title +
+                '</h3><img src="' + url + '"  width="100%"/>' +
+                '</div>' +
+                '</div>';
+            myApp.popup(popupHTML);
         });
 }
 

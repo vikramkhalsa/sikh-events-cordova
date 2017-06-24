@@ -102,27 +102,27 @@
                    {
                        text: 'All Events',
                        onClick: function () {
-                           getEvents("");
+                           filterevents("");
                            $('#filtericon').css('background-color', 'transparent');
                        }
                    },
                    {
                        text: 'Kirtan',
                        onClick: function () {
-                           getEvents("?type=kirtan");
+                           filterevents("kirtan");
                            $('#filtericon').css('background-color', 'lightgrey');
                        }
                    },
                    {
                        text: 'Katha',
                        onClick: function () {
-                           getEvents("?type=katha");
+                           filterevents("katha");
                        }
                    },
                     {
                         text: 'Camp',
                         onClick: function () {
-                            getEvents("?type=camp");
+                            filterevents("camp");
                         }
                     },
                    {
