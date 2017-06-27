@@ -6,15 +6,38 @@
 
 //show a specific event's description
 function showDescription() {
-    var desc = events[this.getAttribute("val")].description;
-    desc = desc.replace(/<br>/g, '\n');
-    desc = desc.replace(/<.?b>/g, '');
-       navigator.notification.alert(
-        desc,  // message
-        alertDismissed,         // callback
-        'Description',            // title
-        'OK'                  // buttonName
-    );
+    var id = this.getAttribute("val");
+
+    var desc = events[id].description;
+    var title = events[id].title;
+
+    var imagenode = "";
+    if (events[id].imageurl) {
+        var url = events[id].imageurl;
+        imagenode = '<img src="' + url + '"  width="100%"/>';
+    }
+
+    var popupHTML = '<div class="popup">' +
+        '<div class="content-block">' +
+        '<p><a style="float:right" href="#" class="close-popup">Close</a></p>' +
+        '<h3>' + title + '</h3>' +
+         '<p>' + desc + '</p>' +
+        imagenode +
+        '</div>' +
+        '</div>';
+
+   // desc = desc.replace(/<br>/g, '\n');
+    //desc = desc.replace(/<.?b>/g, '');
+
+    myApp.popup(popupHTML);
+
+
+    //   navigator.notification.alert(
+    //    desc,  // message
+    //    alertDismissed,         // callback
+    //    'Description',            // title
+    //    'OK'                  // buttonName
+    //);
 }
 
 function alertDismissed() {
@@ -127,11 +150,11 @@ function createEvents(val, items,source) {
         desc = val["description"];
     }
     events[val['id']] = val;
-    var imagebutton = "";
-    if (val["imageurl"]) {
-        imagebutton = '<a class="imageBtn"href="#" val=' + val['id'] +
-            '>View Poster</a>';
-    }
+    //var imagebutton = "";
+    //if (val["imageurl"]) {
+    //    imagebutton = '<a class="imageBtn"href="#" val=' + val['id'] +
+    //        '>View Poster</a>';
+    //}
 
     var sd = val["sd"];
     var ed = val["ed"];
@@ -163,7 +186,7 @@ function createEvents(val, items,source) {
     val["address"] + "' class=\"map-link\">" +
     val["address"] +
     "</a></div>" +
-    val["phone"] + imagebutton + "<div class='spaced'>" +
+    val["phone"] + "<div class='spaced'>" +
     "</div></div></div>"
 );
 }
