@@ -68,20 +68,20 @@
                        }
                    },
                    {
-                       text: 'Kirtans',
+                       text: 'Kirtan',
                        onClick: function () {
                            filterevents("kirtan");
                            $('#filtericon').css('background-color', 'lightgrey');
                        }
                    },
                    {
-                       text: 'Kathas',
+                       text: 'Katha',
                        onClick: function () {
                            filterevents("katha");
                        }
                    },
                     {
-                        text: 'Camps',
+                        text: 'Camp',
                         onClick: function () {
                             filterevents("camp");
                         }

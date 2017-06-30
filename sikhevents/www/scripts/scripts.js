@@ -17,11 +17,18 @@ function showDescription() {
         imagenode = '<img src="' + url + '"  width="100%"/>';
     }
 
+    var linknode = "";
+    if (events[id].siteurl) {
+        var siteurl = events[id].siteurl;
+        linknode = '<a href="' + siteurl + '">'+siteurl+'</a>';
+    } // for future if events have links, show them here. Don't know if it will actually work yet
+
     var popupHTML = '<div class="popup">' +
         '<div class="content-block">' +
         '<p><a style="float:right" href="#" class="close-popup">Close</a></p>' +
         '<h3>' + title + '</h3>' +
          '<p>' + desc + '</p>' +
+        linknode +
         imagenode +
         '</div>' +
         '</div>';
@@ -356,7 +363,6 @@ function filterevents(type) {
 
     $.each(events, filterCheckerFn);
 
-
         $(".main-list")
             .html($("<div/>",
             {
@@ -379,7 +385,7 @@ function filterevents(type) {
             myApp.popup(popupHTML);
         });
     if (type)
-        $('#headerTitle').text(currentRgn + ' (' + type + 's)');
+        $('#headerTitle').text(currentRgn + ' (' + type.substr(0, 1).toUpperCase() + type.substr(1) + ')');
     else
         $('#headerTitle').text(currentRgn);
 
