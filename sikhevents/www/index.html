@@ -5,30 +5,136 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://www.sikh.events/getprograms.php 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src * data: ; connect-src * maps: http://www.sikh.events">
         
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+       
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+        
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
         <title>sikhevents</title>
         <script src="scripts/scripts.js"></script>
     </head>
 <body>
+    
+<!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+<div class="panel panel-left panel-cover" style="background-color: #1c2e4a; ">
+
+    <div class="top-panel">
+        <img src="images/Icon-App-76x76@2x.png" width="25%" style="padding: 5%; vertical-align: middle"/>
+        <img src="images/sikhevents_text_small.png" width="57%" style="vertical-align: middle"/>
+    </div>
+    <div class="content-block-title">Regions</div>
+    <div class="list-block" >
+        <ul id="regions">
+            <li class="navbtn" val="sikhevents">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">All Areas</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content-block-title">Other Sources</div>
+    <div class="list-block">
+        <ul>
+            <li class="navbtn" val="isangat">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">iSangat.org</div>
+                    </div>
+                </div>
+            </li>
+            <li class="navbtn" val="ekhalsa">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">eKhalsa.com</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+ 
+    <div class="bottom-panel">
+        <div style="margin-bottom: 15px">
+            <button id="aboutBtn" class="button">
+                About
+            </button>
+            Available sources and locations for programs will show up here. <br/>
+            Visit <a href="http://www.sikh.events">www.Sikh.events</a> to submit events.
+        </div>
+    </div>
+    <!--<a href="#" data-popup=".popup" class="open-popup">Open About Popup </a>-->
+    <div class="popup">
+        Image
+        <a href="#" class="close-popup">Close popup</a>
+        <img src="images/Icon-App-76x76@2x.png" width="100%"/>
+    </div>
+
+</div>
+    <!-- Views-->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class-->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We have home navbar without left link-->
+                    <div class="left">
+                        <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"><img src="css/images/icons-svg/bars-black.svg"  width="24" height="24" /></a>
+                    </div>
+                    <div id="headerTitle" class="center">Sikh Events</div>
+                    <div class="right">
+                        <a href="#" id="filter" class="link icon-only"><img id="filtericon" src="css/images/icons-svg/filter_list_48px.svg" width="30" height="30"/></a>
+                    </div>
+                    </div>
+            </div>
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, data-page contains page name-->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content-->
+
+                        <div class="page-content main-list">
+                            <!--<span style="padding-left: 15%; padding-top: 5px; padding-bottom:5px" id="headerTitle">Sikh.Events</span>-->
+
+                        </div>
+
+                        </div>
+            </div>
+            <!-- Bottom Toolbar
+            <div class="toolbar">
+                <div class="toolbar-inner"><a href="#" class="link">Link 1</a><a href="#" class="link">Link 2</a></div>
+            </div>-->
+        </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+<script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+<!--
 <div id="statusbar"></div>
 <div class="main-content">
     <div class="header-bar">Bay Area Kirtans <button id="aboutBtn">
             About
         </button>
-    </div>
+    </div>-->
     <!--<div id="deviceready" class="blink">
         <p class="event listening">Connecting to Device</p>
         <p class="event received">Device is Ready</p>
     </div>-->
     <!--<iframe src="http://www.isangat.org" style="width:100%; height:100%"/>-->
 
-</div>
+
 
 
 <script type="text/javascript" src="cordova.js"></script>

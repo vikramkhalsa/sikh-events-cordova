@@ -68,7 +68,7 @@ h1 {
     padding:2px 0px;
 }
 
-.event.listening {
+/*.event.listening {
     background-color:#333333;
     display:block;
 }
@@ -76,7 +76,7 @@ h1 {
 .event.received {
     background-color:#4B946A;
     display:none;
-}
+}*/
 
 @keyframes fade {
     from { opacity: 1.0; }
@@ -103,26 +103,19 @@ h1 {
     min-height: 130px;
 }
 
-    .cell:hover {
+    /*.cell:hover {
         background-color: #bcd4ec;
-    }
+    }*/
 
     #aboutBtn {
-        border-width: 0;
-        background-color: transparent;
-        position: absolute;
-        right: 20px;
-                font-size: 15px;
-        color: white;
-        line-height: 40px;
+        
+        margin: 15px;
+        width: 85%;
+            color: #ebaa2d !important;
+    border-color: #ebaa2d !important;
     }
 
-    .infoBtn {
-  padding: 5px 5px 0px 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 50%;
-  background-color: white;
+ .infoBtn {
         margin-right: 4px;
 }
 
@@ -130,7 +123,8 @@ h1 {
   background-color: #AAA;
 }
 
-.icalBtn {
+
+.iconBtn {
   padding: 5px 5px 0px 5px;
   border-style: solid;
   border-width: 1px;
@@ -138,8 +132,12 @@ h1 {
   background-color: white;
 }
 
-.icalBtn:hover{
-  background-color: #AAA;
+.iconBtn:hover {
+     background-color: #AAA;
+}
+
+.imageBtn {
+    float: right;
 }
 
 .spaced {
@@ -174,6 +172,27 @@ h1 {
 .info-btn {
     height: 20px;
     width: 20px;
+}
+
+.navbtn {
+    color: white;
+    background-color: #1c2e4a;
+}
+
+a {
+  color: #3F51B5 !important;
+}
+
+.bottom-panel {
+    padding: 15px; 
+    /*position: absolute; 
+    bottom: 0;*/ 
+    background: #373737; 
+    color: white
+}
+
+.bottom-panel a {
+    color: #ebaa2d !important;
 }
 
 #statusbar { display: none;} 

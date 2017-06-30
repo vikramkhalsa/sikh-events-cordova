@@ -6,7 +6,8 @@
     "use strict";
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
-    var descriptions;
+    //var descriptions = {};
+
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
         document.addEventListener( 'pause', onPause.bind( this ), false );
@@ -26,59 +27,77 @@
         //}
         //var targetUrl = "http://www.sikh.events";
         //var bkpLink = document.getElementById("bkpLink");
-        //bkpLink.setAttribute("href", targetUrl);
+        //bkpLink.setAttribute("href", targetUrl);  
         //bkpLink.text = targetUrl;
         //window.location.replace(targetUrl);
-        document.body.classList.add(cordova.platformId);
-        $.getJSON("http://www.sikh.events/getprograms.php?source=all", function (data) {
+        //document.body.classList.add(cordova.platformId);
 
-            console.log("testing");
-            var items = [];
-            $.each(data, function (key, val) {
+        $('#aboutBtn').click(showAbout);
+
+        //load events from sikh.events
+        getEvents("");
 
 
-                var sd = formatDate(val["sd"]);
-                var ed = formatDate(val["ed"]);
-                    items.push(
-                        "<div class = \"cell\" id=\""+ val["id"] + "\">" +
-                        "<div class='sd' start='" + sd[3]+"' end='"+ ed[3] +"'>" +
-                    sd[0] + "<br>"+ sd[1] + "<br><br>" + sd[2] +" to <br>" + ed[2] +
-                   "<br><br><button class=\"infoBtn\" val='" + val["description"] + "'><img class=\"info-btn\"src=\"css/images/icons-svg/info-black.svg\"></button>" +
-                   '<button class="icalBtn" val="' + val['id'] + '"><img class="info-btn"src="css/images/icons-svg/calendar-black.svg"></button>  </div> ' +
-                    "<div style=\"width:72%; float:left; top: 50%; \"> <div class=\"programTitle spaced\">" +
-                    val["title"] +
-                    "</div><div class=\"programSubtitle spaced\">" +
-                    val["subtitle"] +
-                    "</div> <div class=\"spaced\"> <a href=\"http://maps.google.com/?q=" +
-                    val["address"] + "\">" +
-                    val["address"] +
-                    "</a></div>" +
-                    val["phone"] + "<div class=\"spaced\">" +
-                    "</div></div></div>"
-                );
-            });
- 
-            $( "<div/>", {
-                "class": "my-new-list",
-                html: items.join( "" )
-            }).appendTo(".main-content");
-document.getElementById('aboutBtn').addEventListener('click',showAbout);
-            var btns = document.getElementsByClassName('infoBtn');//.addEventListener('click', showDescription);
-           for (var i = 0; i < btns.length; i++) {
-               btns[i].addEventListener('click', showDescription, false);
-           }
-           var icalBtns = document.getElementsByClassName('icalBtn');
-           for (var i = 0; i < btns.length; i++) {
-                icalBtns[i].addEventListener('click', exporttocal, false);
-           }
-            //only add margin between buttons if width is above a certain minimum, 
-            //otherwise they go into 2 rows (iphones)
-            var w = $(".sd").width();
-            if (w > 80) {
-                $(".infoBtn").css("margin-right", "15px");
-            }
+        //load and add regions
+           $.getJSON("http://www.sikh.events/getlocations.php?regions=current", function (data) {
+               console.log("Loading Regions");
+               var regions = {};
+               //alert(data);
+               $.each(data, function (key, val) {
+                   regions[val["name"]] = val["regionid"];
 
-        });
+                   $('#regions').append('<li class="navbtn" val="' + 
+                            val["regionid"] +
+                           '"><div class="item-content"><div class="item-inner"><div class="item-title">'+
+                           val["name"]+  
+                        '</div></div></div></li>');
+               });
+
+               //add click handler for region/source buttons
+               $(".navbtn").on("click", showlist);
+           });
+
+        //add filter buttons
+           $$('#filter').on('click', function () {
+               var buttons = [
+                   {
+                       text: 'All Events',
+                       onClick: function () {
+                           filterevents("");
+                           $('#filtericon').css('background-color', 'transparent');
+                       }
+                   },
+                   {
+                       text: 'Kirtan',
+                       onClick: function () {
+                           filterevents("kirtan");
+                           $('#filtericon').css('background-color', 'lightgrey');
+                       }
+                   },
+                   {
+                       text: 'Katha',
+                       onClick: function () {
+                           filterevents("katha");
+                       }
+                   },
+                    {
+                        text: 'Camp',
+                        onClick: function () {
+                            filterevents("camp");
+                        }
+                    },
+                    {
+                        text: 'Other',
+                        onClick: function () {
+                            filterevents("other");
+                        }
+                    },
+                   {
+                       text: 'Cancel'
+                   }
+               ];
+               myApp.actions(buttons);
+           });
     };
 
     function onPause() {
