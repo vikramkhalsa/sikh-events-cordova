@@ -36,45 +36,6 @@
 
         //load events from sikh.events
         getEvents("");
-        //$.getJSON("http://www.sikh.events/getprograms.php", function (data) {
-        //    console.log("Loading sikhevents");
-        //    var items = [];
-        //    $.each(data, function (key, val) {
-        //        createEvents(val, items,"sikhevents");
-        //    });
-
-        //    $("<div/>", {
-        //        "class": "my-new-list",
-        //        html: items.join("")
-        //    }).appendTo(".main-list");
-        //    $(".sikhevents .infoBtn").on("click", showDescription);
-        //    $$('.sikhevents .icalBtn').on('click', function () {
-
-        //        var id = this.getAttribute("val");
-        //        var url = images[id];
-        //        var popupHTML = '<div class="popup">' +
-        //            '<div class="content-block">' +
-        //            '<p><a href="#" class="close-popup">Close</a></p>' +
-        //            '<img src="'+url +'"  width="100%"/>' +
-        //            '</div>' +
-        //            '</div>';
-        //        myApp.popup(popupHTML);
-        //    });
-        //    //$(".sikhevents .icalBtn").on('click', exporttocal);
-        //});
-
-          
-            //only add margin between buttons if width is above a certain minimum, 
-            //otherwise they go into 2 rows (iphones)
-            var w = $(".sd").width();
-            if (w > 80) {
-                $(".infoBtn").css("margin-right", "15px");
-            }
-
-           // Open map links with InAppBrowser
-           $('body').on('click', '.map-link', function(e) {
-                systemLink($(this).attr('href'));
-           });
 
 
         //load and add regions
@@ -107,22 +68,28 @@
                        }
                    },
                    {
-                       text: 'Kirtan',
+                       text: 'Kirtans',
                        onClick: function () {
                            filterevents("kirtan");
                            $('#filtericon').css('background-color', 'lightgrey');
                        }
                    },
                    {
-                       text: 'Katha',
+                       text: 'Kathas',
                        onClick: function () {
                            filterevents("katha");
                        }
                    },
                     {
-                        text: 'Camp',
+                        text: 'Camps',
                         onClick: function () {
                             filterevents("camp");
+                        }
+                    },
+                    {
+                        text: 'Other',
+                        onClick: function () {
+                            filterevents("other");
                         }
                     },
                    {

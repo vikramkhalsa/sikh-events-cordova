@@ -80,6 +80,9 @@ function formatDate(d) {
         var ampm = hrs < 12 ? "am" : "pm";
         hrs = hrs > 12 ? hrs - 12 : hrs == 0 ? 12 : hrs;
         var mins = dt.getMinutes();
+        //if (mins == 0) {
+        //    mins = "";  //consider not showing minutes for times which are at :00
+        //}
         if (mins <= 9)
             mins = "0" + mins;
         var timestr = hrs + ":" + mins + " " + ampm;
@@ -118,7 +121,6 @@ function showlist() {
     $('.navbtn').css("background-color", "#1c2e4a");
 
     $(this).css("background-color", "#466eb4");
-    $('#headerTitle').text($(this).find(".item-title").text());
     var src = this.getAttribute("val");
 
     if (src === "sikhevents") {
@@ -133,9 +135,9 @@ function showlist() {
         getEvents("?region="+src);
     }
 
-    //$(".isangat").css("display", "none");
-    //$(".sikhevents").css("display", "none");
-    //$(".ekhalsa").css("display", "none");
+    currentRgn = $(this).find(".item-title").text();
+    $('#headerTitle').text(currentRgn);
+    $('#filtericon').css('background-color', 'transparent');
 
     //$('.'+src).css("display", "block");
     myApp.closePanel();
@@ -165,8 +167,11 @@ function createEvents(val, items,source) {
         sd = s;
         if (e)
             ed = e;
-        timeStr = "<div class='sd' start='" + sd[3] + "' end='" + ed[3] + "'>" +
-           sd[0] + "<br>" + sd[1] + "<br><br>" + sd[2] + " to <br>" + ed[2];
+        timeStr = "<div class='sd' start='" + sd[3] + "' end='" +ed[3] + "'>" +
+            sd[0] + "<br>" + sd[1];
+        if (sd[1] != ed[1])
+            timeStr = timeStr + " - <br>" + ed[1]; // if multi day event, show start and end dates
+        timeStr = timeStr + "<br><br>" + sd[2] + " to <br>" + ed[2]; //if 1 day event, show start and end time
     }else {
         timeStr = "<div class='sd'>" + sd + " to <br>" + ed;
         }
@@ -199,6 +204,8 @@ function systemLink(url) {
 function getEvents(querystr) {
     events = {};
     var eventurl = "http://www.sikh.events/getprograms.php";
+
+    myApp.showIndicator();
     $.getJSON(eventurl + querystr,
         function(data) {
             console.log("Loading sikhevents");
@@ -228,14 +235,29 @@ function getEvents(querystr) {
                         '</div>' +
                         '</div>';
                     myApp.popup(popupHTML);
-                });
+            });
+
+            //only add margin between buttons if width is above a certain minimum, 
+            //otherwise they go into 2 rows (iphones)
+            var w = $(".sd").width();
+            if (w > 80) {
+                $(".infoBtn").css("margin-right", "15px");
+            }
+
+            // Open map links with InAppBrowser
+            $('body').on('click', '.map-link', function (e) {
+                systemLink($(this).attr('href'));
+            });
+
+            myApp.hideIndicator();
+
         });
 }
 
 function getiSangat() {
 
     events = {};
-
+    myApp.showIndicator();
     //load from isangat
     $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
         console.log("loading isangat");
@@ -254,12 +276,26 @@ function getiSangat() {
         //$(".infoBtn").hide();
         $(".infoBtn").on("click", showDescription);
         $(".icalBtn").on('click', exporttocal);
+
+        //only add margin between buttons if width is above a certain minimum, 
+        //otherwise they go into 2 rows (iphones)
+        var w = $(".sd").width();
+        if (w > 80) {
+            $(".infoBtn").css("margin-right", "15px");
+        }
+
+        // Open map links with InAppBrowser
+        $('body').on('click', '.map-link', function (e) {
+            systemLink($(this).attr('href'));
+        });
+        myApp.hideIndicator();
     });
 }
 
 function geteKhalsa() {
     events = {};
 
+    myApp.showIndicator();
     //load from ekhalsa
     $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa",
         function(data) {
@@ -281,16 +317,46 @@ function geteKhalsa() {
             // $(".ekhalsa").css("display", "none");
             $(".icalBtn").hide();
             $(".infoBtn").hide();
+
+            //only add margin between buttons if width is above a certain minimum, 
+            //otherwise they go into 2 rows (iphones)
+            var w = $(".sd").width();
+            if (w > 80) {
+                $(".infoBtn").css("margin-right", "15px");
+            }
+
+            // Open map links with InAppBrowser
+            $('body').on('click', '.map-link', function (e) {
+                systemLink($(this).attr('href'));
+            });
+            myApp.hideIndicator();
         });
 }
 
 function filterevents(type) {
     var items = [];
-    $.each(events,function (key, val) {
-                       if (val.type == type||type === "") {                         
-                           createEvents(val, items, "sikhevents");
-                       }
-                    });
+    var filterCheckerFn;
+    if (type == 'other') {
+        filterCheckerFn = 
+            function(key, val) {
+                var eventType = val.type;
+                if (eventType != "kirtan" && eventType != 'katha' && eventType != 'camp') {
+                    createEvents(val, items, "sikhevents");
+                }
+            };
+    } else {
+        filterCheckerFn = 
+       function (key, val) {
+           var eventType = val.type;
+            if (eventType == type || type === "") {
+               createEvents(val, items, "sikhevents");
+           }
+       };
+    }
+
+    $.each(events, filterCheckerFn);
+
+
         $(".main-list")
             .html($("<div/>",
             {
@@ -312,8 +378,13 @@ function filterevents(type) {
                 '</div>';
             myApp.popup(popupHTML);
         });
+    if (type)
+        $('#headerTitle').text(currentRgn + ' (' + type + 's)');
+    else
+        $('#headerTitle').text(currentRgn);
+
 }
 
-
+var currentRgn = "Sikh Events";
 
 
