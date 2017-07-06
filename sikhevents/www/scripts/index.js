@@ -61,6 +61,10 @@
            $$('#filter').on('click', function () {
                var buttons = [
                    {
+                       text: 'Filter Event Type',
+                       label: true
+                   },
+                   {
                        text: 'All Events',
                        onClick: function () {
                            filterevents("");
@@ -93,7 +97,8 @@
                         }
                     },
                    {
-                       text: 'Cancel'
+                       text: 'Cancel',
+                       color: 'red'
                    }
                ];
                myApp.actions(buttons);
