@@ -136,9 +136,17 @@ function showlist() {
     else if (src === "isangat") {
         getiSangat();
 
-    } else if (src === "ekhalsa") {
+    }
+    else if (src === "ekhalsa") {
         geteKhalsa();
-    } else {
+    }
+    else if (src === "akjorg") {
+        getEvents("?source=akjorg");
+    }
+    else if (src === "samagams") {
+        getEvents("?source=samagams");;
+    }
+    else {
         getEvents("?region="+src);
     }
 
@@ -158,6 +166,10 @@ function createEvents(val, items,source) {
     if ("description" in val) {
         desc = val["description"];
     }
+    var phone = "";
+    if (val["phone"])
+        phone = val["phone"];
+
     events[val['id']] = val;
     //var imagebutton = "";
     //if (val["imageurl"]) {
@@ -198,7 +210,7 @@ function createEvents(val, items,source) {
     val["address"] + "' class=\"map-link\">" +
     val["address"] +
     "</a></div>" +
-    val["phone"] + "<div class='spaced'>" +
+    phone + "<div class='spaced'>" +
     "</div></div></div>"
 );
 }
@@ -280,7 +292,6 @@ function getiSangat() {
              html: items.join("")
          }));
 
-        //$(".infoBtn").hide();
         $(".infoBtn").on("click", showDescription);
         $(".icalBtn").on('click', exporttocal);
 
