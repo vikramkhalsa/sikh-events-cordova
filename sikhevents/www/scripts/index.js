@@ -36,6 +36,7 @@
 
         //load events from sikh.events
         getEvents("");
+        //will add filter options with counts once all events are loaded
 
 
         //load and add regions
@@ -57,52 +58,6 @@
                $(".navbtn").on("click", showlist);
            });
 
-        //add filter buttons
-           $$('#filter').on('click', function () {
-               var buttons = [
-                   {
-                       text: 'Filter Event Type',
-                       label: true
-                   },
-                   {
-                       text: 'All Events',
-                       onClick: function () {
-                           filterevents("");
-                           $('#filtericon').css('background-color', 'transparent');
-                       }
-                   },
-                   {
-                       text: 'Kirtan',
-                       onClick: function () {
-                           filterevents("kirtan");
-                           $('#filtericon').css('background-color', 'lightgrey');
-                       }
-                   },
-                   {
-                       text: 'Katha',
-                       onClick: function () {
-                           filterevents("katha");
-                       }
-                   },
-                    {
-                        text: 'Camp',
-                        onClick: function () {
-                            filterevents("camp");
-                        }
-                    },
-                    {
-                        text: 'Other',
-                        onClick: function () {
-                            filterevents("other");
-                        }
-                    },
-                   {
-                       text: 'Cancel',
-                       color: 'red'
-                   }
-               ];
-               myApp.actions(buttons);
-           });
     };
 
     function onPause() {

@@ -129,25 +129,32 @@ function showlist() {
 
     $(this).css("background-color", "#466eb4");
     var src = this.getAttribute("val");
+    var filterBtn = $('#filter');
 
     if (src === "sikhevents") {
         getEvents("");
+        filterBtn.show();
     }
     else if (src === "isangat") {
         getiSangat();
+        filterBtn.hide();
 
     }
     else if (src === "ekhalsa") {
         geteKhalsa();
+        filterBtn.hide();
     }
     else if (src === "akjorg") {
         getEvents("?source=akjorg");
+        filterBtn.hide();
     }
     else if (src === "samagams") {
-        getEvents("?source=samagams");;
+        getEvents("?source=samagams");
+        filterBtn.hide();
     }
     else {
-        getEvents("?region="+src);
+        getEvents("?region=" + src);
+        filterBtn.show();
     }
 
     currentRgn = $(this).find(".item-title").text();
@@ -189,8 +196,10 @@ function createEvents(val, items,source) {
         timeStr = "<div class='sd' start='" + sd[3] + "' end='" +ed[3] + "'>" +
             sd[0] + "<br>" + sd[1];
         if (sd[1] != ed[1])
-            timeStr = timeStr + " - <br>" + ed[1]; // if multi day event, show start and end dates
-        timeStr = timeStr + "<br><br>" + sd[2] + " to <br>" + ed[2]; //if 1 day event, show start and end time
+            timeStr = timeStr + " - <br>" + ed[1]; // if multi day event, show end date too.
+
+        if (val["allday"] != 1)
+            timeStr = timeStr + "<br><br>" + sd[2] + " to <br>" + ed[2]; //if not an all day event, show start and end times
     }else {
         timeStr = "<div class='sd'>" + sd + " to <br>" + ed;
         }
@@ -222,7 +231,7 @@ function systemLink(url) {
 
 function getEvents(querystr) {
     events = {};
-    var eventurl = "http://www.sikh.events/getprograms.php";
+    var eventurl = "https://www.sikh.events/getprograms.php";
 
     myApp.showIndicator();
     $.getJSON(eventurl + querystr,
@@ -268,7 +277,11 @@ function getEvents(querystr) {
                 systemLink($(this).attr('href'));
             });
 
+            //update filtercounts now
+            updateFilters();
+
             myApp.hideIndicator();
+
 
         });
 }
@@ -278,7 +291,7 @@ function getiSangat() {
     events = {};
     myApp.showIndicator();
     //load from isangat
-    $.getJSON("http://www.sikh.events/getprograms.php?source=isangat", function (data) {
+    $.getJSON("https://www.sikh.events/getprograms.php?source=isangat", function (data) {
         console.log("loading isangat");
         var items = [];
         $.each(data.programs, function (key, val) {
@@ -315,7 +328,7 @@ function geteKhalsa() {
 
     myApp.showIndicator();
     //load from ekhalsa
-    $.getJSON("http://www.sikh.events/getprograms.php?source=ekhalsa",
+    $.getJSON("https://www.sikh.events/getprograms.php?source=ekhalsa",
         function(data) {
             console.log("loading ekhalsa");
             var items = [];
@@ -358,7 +371,7 @@ function filterevents(type) {
         filterCheckerFn = 
             function(key, val) {
                 var eventType = val.type;
-                if (eventType != "kirtan" && eventType != 'katha' && eventType != 'camp') {
+                if (eventType != "kirtan" && eventType != 'katha' && eventType != 'camp' && eventType != 'seva') {
                     createEvents(val, items, "sikhevents");
                 }
             };
@@ -404,4 +417,92 @@ function filterevents(type) {
 
 var currentRgn = "Sikh Events";
 
+function updateFilters() {
 
+    var eventsCount = 0;
+    var kirtanCount = 0;
+    var kathaCount = 0;
+    var campCount = 0;
+    var sevaCount = 0;
+    //var discussionCount = 0;
+    //var samagamCount = 0;
+    var otherCount = 0;
+
+    var eventsAr = Object.keys(events);
+    eventsCount = eventsAr.length;
+
+
+    for (var i = 0; i < eventsAr.length; i++) {
+        let eventType = events[eventsAr[i]].type;
+        switch (eventType) { 
+            case "kirtan":
+                kirtanCount += 1;
+                break;
+            case "katha":
+                kathaCount += 1;
+                break;
+            case "camp":
+                campCount += 1;
+                break;
+            case "seva":
+                sevaCount += 1;
+                break;
+            default:
+                otherCount += 1;
+        }
+
+    }
+
+    //add filter buttons
+    $$('#filter').on('click', function () {
+        var buttons = [
+            {
+                text: 'Filter Event Type',
+                label: true
+            },
+            {
+                text: 'All Events (' + eventsCount + ')',
+                onClick: function () {
+                    filterevents("");
+                    $('#filtericon').css('background-color', 'transparent');
+                }
+            },
+            {
+                text: 'Kirtan (' + kirtanCount + ')',
+                onClick: function () {
+                    filterevents("kirtan");
+                    $('#filtericon').css('background-color', 'lightgrey');
+                }
+            },
+            {
+                text: 'Katha (' + kathaCount + ')',
+                onClick: function () {
+                    filterevents("katha");
+                }
+            },
+            {
+                text: 'Camp (' + campCount + ')',
+                onClick: function () {
+                    filterevents("camp");
+                }
+            },
+            {
+                text: 'Seva (' + sevaCount + ')',
+                onClick: function () {
+                    filterevents("seva");
+                }
+            },
+            {
+                text: 'Other (' + otherCount + ')',
+                onClick: function () {
+                    filterevents("other");
+                }
+            },
+            {
+                text: 'Cancel',
+                color: 'red'
+            }
+        ];
+        myApp.actions(buttons);
+    });
+}
