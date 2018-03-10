@@ -7,7 +7,7 @@
   <vs:features />
   <preference name="SplashScreen" value="screen" />
   <preference name="DisallowOverscroll" value="true" />
-  <preference name="windows-target-version" value="8.1" />
+  <preference name="windows-target-version" value="10.0" />
   <!-- Support for Cordova 5.0.0 plugin system -->
   <allow-intent href="*" />
   <allow-intent href="http://*/*" />
@@ -59,6 +59,8 @@
     <!-- iPad Spotlight and Settings Icon -->
     <icon src="res/icons/ios/Icon-Small-50x50@1x.png" width="50" height="50" />
     <icon src="res/icons/ios/Icon-Small-50x50@2x.png" width="100" height="100" />
+
+    <icon src="res/icons/ios/Icon-App-1024x1024.png" width="1024" height="1024" />
   </platform>
   <platform name="windows">
     <icon src="res/icons/windows/Square150x150Logo.scale-100.png" width="150" height="150" />
@@ -117,6 +119,10 @@
   </plugin>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.2" />
   <plugin name="cordova-plugin-compat" version="1.1.0" />
-  <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
-  <plugin name="cordova-plugin-whitelist" version="1.3.2" />
+  <vs:toolsetVersion>6.3.1</vs:toolsetVersion>
+  <engine name="android" spec="5.2.1" />
+  <engine name="ios" spec="4.2.0" />
+  <engine name="windows" spec="4.4.2" />
+  <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
+  <plugin name="cordova-plugin-inappbrowser" spec="~2.0.2" />
 </widget>
