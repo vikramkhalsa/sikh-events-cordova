@@ -85,7 +85,7 @@ function formatDate(d) {
         var datestr = month + " " + date;
         var hrs = dt.getHours();
         var ampm = hrs < 12 ? "am" : "pm";
-        hrs = hrs > 12 ? hrs - 12 : hrs == 0 ? 12 : hrs;
+        hrs = hrs > 12 ? hrs - 12 : hrs === 0 ? 12 : hrs;
         var mins = dt.getMinutes();
         //if (mins == 0) {
         //    mins = "";  //consider not showing minutes for times which are at :00
@@ -195,10 +195,10 @@ function createEvents(val, items,source) {
             ed = e;
         timeStr = "<div class='sd' start='" + sd[3] + "' end='" +ed[3] + "'>" +
             sd[0] + "<br>" + sd[1];
-        if (sd[1] != ed[1])
+        if (sd[1] !== ed[1])
             timeStr = timeStr + " - <br>" + ed[1]; // if multi day event, show end date too.
 
-        if (val["allday"] != 1)
+        if (val["allday"] !== 1)
             timeStr = timeStr + "<br><br>" + sd[2] + " to <br>" + ed[2]; //if not an all day event, show start and end times
     }else {
         timeStr = "<div class='sd'>" + sd + " to <br>" + ed;
@@ -282,7 +282,6 @@ function getEvents(querystr) {
 
             myApp.hideIndicator();
 
-
         });
 }
 
@@ -364,14 +363,15 @@ function geteKhalsa() {
         });
 }
 
+//hides or shows events based on the event type given.
 function filterevents(type) {
     var items = [];
     var filterCheckerFn;
-    if (type == 'other') {
+    if (type === 'other') {
         filterCheckerFn = 
             function(key, val) {
                 var eventType = val.type;
-                if (eventType != "kirtan" && eventType != 'katha' && eventType != 'camp' && eventType != 'seva') {
+                if (eventType !== "kirtan" && eventType !== 'katha' && eventType !== 'camp' && eventType !== 'seva') {
                     createEvents(val, items, "sikhevents");
                 }
             };
@@ -379,7 +379,7 @@ function filterevents(type) {
         filterCheckerFn = 
        function (key, val) {
            var eventType = val.type;
-            if (eventType == type || type === "") {
+            if (eventType === type || type === "") {
                createEvents(val, items, "sikhevents");
            }
        };
@@ -417,16 +417,28 @@ function filterevents(type) {
 
 var currentRgn = "Sikh Events";
 
+
+var eventsCount = 0;
+var kirtanCount = 0;
+var kathaCount = 0;
+var campCount = 0;
+var sevaCount = 0;
+//var discussionCount = 0;
+//var samagamCount = 0;
+var otherCount = 0;
+
+
+//updates filter counts of each event type
 function updateFilters() {
 
-    var eventsCount = 0;
-    var kirtanCount = 0;
-    var kathaCount = 0;
-    var campCount = 0;
-    var sevaCount = 0;
-    //var discussionCount = 0;
-    //var samagamCount = 0;
-    var otherCount = 0;
+
+    kirtanCount = 0;
+    kathaCount = 0;
+    campCount = 0;
+    sevaCount = 0;
+    //discussionCount = 0;
+    //samagamCount = 0;
+    otherCount = 0;
 
     var eventsAr = Object.keys(events);
     eventsCount = eventsAr.length;
@@ -453,56 +465,61 @@ function updateFilters() {
 
     }
 
+
+    $$('#filter').off('click', filterHandler);
     //add filter buttons
-    $$('#filter').on('click', function () {
-        var buttons = [
-            {
-                text: 'Filter Event Type',
-                label: true
-            },
-            {
-                text: 'All Events (' + eventsCount + ')',
-                onClick: function () {
-                    filterevents("");
-                    $('#filtericon').css('background-color', 'transparent');
-                }
-            },
-            {
-                text: 'Kirtan (' + kirtanCount + ')',
-                onClick: function () {
-                    filterevents("kirtan");
-                    $('#filtericon').css('background-color', 'lightgrey');
-                }
-            },
-            {
-                text: 'Katha (' + kathaCount + ')',
-                onClick: function () {
-                    filterevents("katha");
-                }
-            },
-            {
-                text: 'Camp (' + campCount + ')',
-                onClick: function () {
-                    filterevents("camp");
-                }
-            },
-            {
-                text: 'Seva (' + sevaCount + ')',
-                onClick: function () {
-                    filterevents("seva");
-                }
-            },
-            {
-                text: 'Other (' + otherCount + ')',
-                onClick: function () {
-                    filterevents("other");
-                }
-            },
-            {
-                text: 'Cancel',
-                color: 'red'
+    $$('#filter').on('click', filterHandler);
+}
+
+//handles filter button click to show event type list with updated counts
+function filterHandler() {
+    var buttons = [
+        {
+            text: 'Filter Event Type',
+            label: true
+        },
+        {
+            text: 'All Events (' + eventsCount + ')',
+            onClick: function () {
+                filterevents("");
+                $('#filtericon').css('background-color', 'transparent');
             }
-        ];
-        myApp.actions(buttons);
-    });
+        },
+        {
+            text: 'Kirtan (' + kirtanCount + ')',
+            onClick: function () {
+                filterevents("kirtan");
+                $('#filtericon').css('background-color', 'lightgrey');
+            }
+        },
+        {
+            text: 'Katha (' + kathaCount + ')',
+            onClick: function () {
+                filterevents("katha");
+            }
+        },
+        {
+            text: 'Camp (' + campCount + ')',
+            onClick: function () {
+                filterevents("camp");
+            }
+        },
+        {
+            text: 'Seva (' + sevaCount + ')',
+            onClick: function () {
+                filterevents("seva");
+            }
+        },
+        {
+            text: 'Other (' + otherCount + ')',
+            onClick: function () {
+                filterevents("other");
+            }
+        },
+        {
+            text: 'Cancel',
+            color: 'red'
+        }
+    ];
+    myApp.actions(buttons);
 }
